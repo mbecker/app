@@ -162,7 +162,6 @@ final class SpotASCellNode: ASCellNode {
     }
     
     
-    
 }
 
 extension SpotASCellNode: ASNetworkImageNodeDelegate {

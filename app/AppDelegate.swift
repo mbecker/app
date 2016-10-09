@@ -22,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.backgroundColor = UIColor.white
-        window.rootViewController = UINavigationController(rootViewController: ViewController());
+//        window.rootViewController = UINavigationController(rootViewController: ViewController());
+        window.rootViewController = ARNImageTransitionNavigationController(rootViewController: ViewController())
         window.makeKeyAndVisible()
         self.window = window
         return true

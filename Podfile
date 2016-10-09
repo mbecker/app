@@ -12,7 +12,7 @@ target 'app' do
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   pod 'Kingfisher', '~> 3.0'
-  pod 'LayoutKit'
+  pod 'ARNTransitionAnimator'
 
   target 'appTests' do
     inherit! :search_paths

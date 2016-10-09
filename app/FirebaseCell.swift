@@ -12,7 +12,9 @@ import FirebaseStorage
 
 class FirebaseCell: ASCellNode, ASCollectionDelegate, ASCollectionDataSource {
   
-  var collectionNode: ASCollectionNode?
+  weak var delegate:ZoomCellDelegate?
+    
+    var collectionNode: ASCollectionNode?
   
   var section: Section!
   var ref: FIRDatabaseReference = FIRDatabaseReference()
@@ -21,6 +23,7 @@ class FirebaseCell: ASCellNode, ASCollectionDelegate, ASCollectionDataSource {
   var itemSize: CGSize
   
   var items: [SectionData] = [SectionData]()
+    var _images: [Int: ASNetworkImageNode] = [Int: ASNetworkImageNode]()
   
   
   init(section: Section, sectionSize: CGSize) {
@@ -32,7 +35,7 @@ class FirebaseCell: ASCellNode, ASCollectionDelegate, ASCollectionDataSource {
     
     super.init()
     
-    // Disabel tabel cell selection
+    // Disabel table cell selection
     self.selectionStyle = UITableViewCellSelectionStyle.none
   }
   
@@ -104,62 +107,10 @@ class FirebaseCell: ASCellNode, ASCollectionDelegate, ASCollectionDataSource {
   
   func collectionView(_ collectionView: ASCollectionView, nodeBlockForItemAt indexPath: IndexPath) -> ASCellNodeBlock {
     return {
-//      let node = ASTextCellNode()
-//      node.backgroundColor = UIColor(red:0.00, green:0.62, blue:0.56, alpha:1.00)
-//      node.text = String(format: "%@", self.appData[(indexPath as NSIndexPath).item].name)
-//      let imageNode = ASDisplayNode(viewBlock: {
-//        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-//        imageView.image = UIImage(named: "Zebra1")
-//        return imageView
-//      })
-//      let cache = KingfisherCache.sharedManager
-//      let networkImageNode = ASNetworkImageNode(cache: cache, downloader: cache)
-////      let networkImageNode = ASNetworkImageNode()
-//      networkImageNode.frame = CGRect(x: 0, y: 0, width: self.itemSize.width, height: self.itemSize.height)
-//      networkImageNode.preferredFrameSize = CGSize(width: 100, height: 100)
-//      networkImageNode.shouldRenderProgressImages = true
-//      networkImageNode.isLayerBacked = false
-//      networkImageNode.placeholderColor = UIColor.yellow
-//      networkImageNode.defaultImage = UIImage(named: "imageBackground")
-//      
-//      let item = self.items[indexPath.item]
-//      
-//      if let imageURL: String = item.url as String!, imageURL.characters.count > 0 {
-//        let imgRef = self.storage.reference(forURL: imageURL)
-//        print("················ \(Date().iso8601) - Start with storage url")
-//        imgRef.downloadURL(completion: { (storageURL, error) -> Void in
-//          if error != nil {
-//            print("················ \(Date().iso8601) - download url error")
-//            networkImageNode.url = URL(string: "https://dummyimage.com/345x261/000/fff.png&text=FirebaseError")
-//          } else {
-//            print("················ \(Date().iso8601) - storage url created")
-//            networkImageNode.url = storageURL
-//          }
-//        })
-//      } else {
-//        print("················ \(Date().iso8601) - no image url")
-//        networkImageNode.url = URL(string: "https://dummyimage.com/345x261/000/fff.png&text=NoImage")
-//      }
-//      
-//      let attributedString = NSMutableAttributedString(string: item.name + " 😸")
-//      
-//      attributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Light", size: 16.0)!, range: NSRange(location: 0, length: item.name.characters.count))
-//      
-//      let textNode = ASTextNode()
-//      textNode.attributedString = attributedString
-//      textNode.frame = CGRect(x: 0, y: 25, width: 100, height: 50)
-//
-//      
-//      
-//      let nodeBlock = ASCellNode()
-//      nodeBlock.frame = CGRect(x: 0, y: 0, width: self.itemSize.width, height: self.itemSize.height)
-//      nodeBlock.addSubnode(networkImageNode)
-//      nodeBlock.addSubnode(textNode)
-//      
-//      return nodeBlock
       let node = SpotASCellNode(cellData: self.items[indexPath.item], cellSize: self.itemSize)
       node.frame = CGRect(x: 0, y: 0, width: self.itemSize.width, height: self.itemSize.height)
       node.backgroundColor = UIColor.white
+        self._images[indexPath.item] = node._image
       return node
     }
   }
@@ -170,8 +121,8 @@ class FirebaseCell: ASCellNode, ASCollectionDelegate, ASCollectionDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let item = self.items[indexPath.item]
-    DatabaseModels().deleteItem(ref: item.ref)
+    guard let cell = self.collectionNode?.view.nodeForItem(at: indexPath) as? SpotASCellNode else { return }
+    delegate?.selectedItem(items[indexPath.item], cell._image)
   }
   
   
@@ -200,6 +151,10 @@ class FirebaseCell: ASCellNode, ASCollectionDelegate, ASCollectionDataSource {
   }
   
   
+}
+
+protocol ZoomCellDelegate: class {
+    func selectedItem(_ item: SectionData, _ image:ASNetworkImageNode)
 }
 
 extension Date {

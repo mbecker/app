@@ -20,13 +20,14 @@ import AsyncDisplayKit
 import Firebase
 import FirebaseDatabase
 import Kingfisher
+import ARNTransitionAnimator
 
 let airBnbImageFooterHeight: CGFloat = 58
 let airBnbHeight: CGFloat = 218 + airBnbImageFooterHeight
 let airBnbInset = UIEdgeInsetsMake(0, 24, 0, 24)
 
 
-final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, ASTableDelegate {
+final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, ASTableDelegate, ARNImageTransitionZoomable, ZoomCellDelegate {
   
   var sections : [Section] = [Section]()
   
@@ -37,6 +38,9 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
   // MARK: Firebase init
   var ref: FIRDatabaseReference!
   var refs: [FIRDatabaseReference] = [FIRDatabaseReference]()
+    
+    // ARNImageTransitionZoomable
+    var _imageTransitionZoomable: ASNetworkImageNode?
 
 
   init() {
@@ -84,7 +88,9 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
   
   func tableView(_ tableView: ASTableView, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
     return {
-      return FirebaseCell(section: self.sections[indexPath.section], sectionSize: CGSize(width: self.view.frame.width, height: airBnbHeight))
+        let cell = FirebaseCell(section: self.sections[indexPath.section], sectionSize: CGSize(width: self.view.frame.width, height: airBnbHeight))
+        cell.delegate = self
+      return cell
     }
   }
 
@@ -154,6 +160,48 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
   func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
     return 46
   }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    // MARK: - CustomCellDelegate
+    
+    func selectedItem(_ item:SectionData, _ image:ASNetworkImageNode){
+        self._imageTransitionZoomable = image
+        let storyboard = UIStoryboard(name: "DetailViewController", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        controller.image = self._imageTransitionZoomable?.image
+        controller.title = item.name
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    // MARK: - ARNImageTransitionZoomable
+    
+    func createTransitionImageView() -> UIImageView {
+        let imageView = UIImageView(image: self._imageTransitionZoomable?.image)
+        imageView.contentMode = (self._imageTransitionZoomable?.contentMode)!
+        imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = false
+        
+        // Get superlayer
+        var rootLayer: CALayer? = self._imageTransitionZoomable?.layer
+        while let nextLayer = rootLayer?.superlayer {
+            rootLayer = nextLayer
+        }
+        
+        imageView.frame = (self._imageTransitionZoomable?.layer.convert((self._imageTransitionZoomable?.frame)!, to: rootLayer))!
+        return imageView
+    }
+    
+    func presentationCompletionAction(_ completeTransition: Bool) {
+        self._imageTransitionZoomable?.isHidden = true
+    }
+    
+    func dismissalCompletionAction(_ completeTransition: Bool) {
+        self._imageTransitionZoomable?.isHidden = false
+    }
+    
   
   // MARK: Action Handling
   
@@ -177,6 +225,10 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
     
     alert.addAction(UIAlertAction(title: "Add 50", style: UIAlertActionStyle.default, handler: { action in
       db.insertBatch(count: 50)
+    }))
+    
+    alert.addAction(UIAlertAction(title: "Add Zebra", style: UIAlertActionStyle.default, handler: { action in
+        db.addAnimal(animal: "Zebra")
     }))
     
     alert.addAction(UIAlertAction(title: "Add Giraffe", style: UIAlertActionStyle.default, handler: { action in

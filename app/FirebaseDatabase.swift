@@ -59,6 +59,10 @@ class DatabaseModels: AnyObject {
         url: "gs://safaridigitalapp.appspot.com/animals/Giraffe1.JPG"
     ))
     
+    self.animals.append(
+        dbData.init(name: "Zebra", url: "gs://safaridigitalapp.appspot.com/animals/Zebra1.jpg")
+    )
+    
     
     
     /* Attractions */

@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		4DF3C72AF53B4BF936D94D04 /* Pods_appUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61173E49A26CA795742CE2CE /* Pods_appUITests.framework */; };
 		A6EEAF836EF6B60B2532152E /* Pods_appTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA74F14B0AD75A1BFBBEB41 /* Pods_appTests.framework */; };
+		D128FC101DA91F7200854982 /* ARNImageZoomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D128FC0D1DA91F7200854982 /* ARNImageZoomTransition.swift */; };
+		D128FC111DA91F7200854982 /* ARNModalImageTransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D128FC0E1DA91F7200854982 /* ARNModalImageTransitionViewController.swift */; };
+		D128FC121DA91F7200854982 /* ARNImageTransitionNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D128FC0F1DA91F7200854982 /* ARNImageTransitionNavigationController.swift */; };
+		D128FC151DA91FD300854982 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D128FC131DA91FD300854982 /* DetailViewController.swift */; };
+		D128FC161DA91FD300854982 /* DetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D128FC141DA91FD300854982 /* DetailViewController.storyboard */; };
 		D171AA2A1DA56AE80074BB28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D171AA291DA56AE80074BB28 /* AppDelegate.swift */; };
 		D171AA321DA56AE90074BB28 /* app.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D171AA301DA56AE80074BB28 /* app.xcdatamodeld */; };
 		D171AA341DA56AE90074BB28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D171AA331DA56AE90074BB28 /* Assets.xcassets */; };
@@ -65,6 +70,11 @@
 		708292EF6BC3E087DADC69B5 /* Pods_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BA74F14B0AD75A1BFBBEB41 /* Pods_appTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_appTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B589666911935BE6F71D1592 /* Pods-appUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-appUITests/Pods-appUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D128FC0D1DA91F7200854982 /* ARNImageZoomTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARNImageZoomTransition.swift; sourceTree = "<group>"; };
+		D128FC0E1DA91F7200854982 /* ARNModalImageTransitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARNModalImageTransitionViewController.swift; sourceTree = "<group>"; };
+		D128FC0F1DA91F7200854982 /* ARNImageTransitionNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARNImageTransitionNavigationController.swift; sourceTree = "<group>"; };
+		D128FC131DA91FD300854982 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		D128FC141DA91FD300854982 /* DetailViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailViewController.storyboard; sourceTree = "<group>"; };
 		D171AA261DA56AE80074BB28 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D171AA291DA56AE80074BB28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D171AA311DA56AE80074BB28 /* app.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = app.xcdatamodel; sourceTree = "<group>"; };
@@ -154,6 +164,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D128FC0C1DA91F6000854982 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				D128FC0D1DA91F7200854982 /* ARNImageZoomTransition.swift */,
+				D128FC0E1DA91F7200854982 /* ARNModalImageTransitionViewController.swift */,
+				D128FC0F1DA91F7200854982 /* ARNImageTransitionNavigationController.swift */,
+			);
+			name = lib;
+			sourceTree = "<group>";
+		};
 		D171AA1D1DA56AE80074BB28 = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +199,7 @@
 		D171AA281DA56AE80074BB28 /* app */ = {
 			isa = PBXGroup;
 			children = (
+				D128FC0C1DA91F6000854982 /* lib */,
 				D171AA771DA56E790074BB28 /* Supporting Files */,
 				D171AA6A1DA56B930074BB28 /* Model */,
 				D171AA691DA56B7B0074BB28 /* Views */,
@@ -237,6 +258,8 @@
 				D171AA711DA56C9D0074BB28 /* ViewController.swift */,
 				D171AA731DA56CA20074BB28 /* FirebaseCell.swift */,
 				D171AA751DA56CA70074BB28 /* SpotASCellNode.swift */,
+				D128FC131DA91FD300854982 /* DetailViewController.swift */,
+				D128FC141DA91FD300854982 /* DetailViewController.storyboard */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -394,6 +417,7 @@
 				D171AA931DA575070074BB28 /* Calibre-RegularItalic.otf in Resources */,
 				D171AA941DA575070074BB28 /* Calibre-Semibold.otf in Resources */,
 				D171AA911DA575070074BB28 /* Calibre-MediumItalic.otf in Resources */,
+				D128FC161DA91FD300854982 /* DetailViewController.storyboard in Resources */,
 				D171AA921DA575070074BB28 /* Calibre-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -542,13 +566,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D128FC151DA91FD300854982 /* DetailViewController.swift in Sources */,
 				D171AA721DA56C9D0074BB28 /* ViewController.swift in Sources */,
+				D128FC111DA91F7200854982 /* ARNModalImageTransitionViewController.swift in Sources */,
 				D171AA6E1DA56C630074BB28 /* KingfisherCache.swift in Sources */,
 				D171AA741DA56CA20074BB28 /* FirebaseCell.swift in Sources */,
 				D171AA2A1DA56AE80074BB28 /* AppDelegate.swift in Sources */,
 				D171AA7B1DA574D20074BB28 /* Helpers.swift in Sources */,
+				D128FC121DA91F7200854982 /* ARNImageTransitionNavigationController.swift in Sources */,
 				D171AA321DA56AE90074BB28 /* app.xcdatamodeld in Sources */,
 				D171AA6C1DA56C4C0074BB28 /* AppData.swift in Sources */,
+				D128FC101DA91F7200854982 /* ARNImageZoomTransition.swift in Sources */,
 				D171AA701DA56C680074BB28 /* FirebaseDatabase.swift in Sources */,
 				D171AA761DA56CA70074BB28 /* SpotASCellNode.swift in Sources */,
 			);

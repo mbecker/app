@@ -36,7 +36,7 @@ final class SpotASCellNode: ASCellNode {
         self._image                     = ASNetworkImageNode(cache: cache, downloader: cache)
         self._image.placeholderEnabled  = true
         self._image.defaultImage        = UIImage(named: "imagebackgrounddefault")
-        self._image.contentMode         = .scaleAspectFit
+        self._image.contentMode         = .scaleAspectFill
         
         self._loadingIndicator          = SpinnerNode()
         

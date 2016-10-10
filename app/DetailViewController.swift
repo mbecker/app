@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UIImageViewAlignedSwift
 
 class DetailViewController: UIViewController, ARNImageTransitionZoomable {
     

@@ -51,7 +51,6 @@ PODS:
     - PINCache (>= 3.0.0-beta)
   - PINRemoteImage/iOS (3.0.0-beta.3):
     - PINRemoteImage/Core
-  - UIImageViewAlignedSwift (0.3.1)
 
 DEPENDENCIES:
   - ARNTransitionAnimator
@@ -61,7 +60,6 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - Kingfisher (~> 3.0)
-  - UIImageViewAlignedSwift
 
 EXTERNAL SOURCES:
   AsyncDisplayKit:
@@ -83,8 +81,7 @@ SPEC CHECKSUMS:
   Kingfisher: 12b755ae697cc9f0fd3e550db8417fa1233e09ab
   PINCache: 6911fe422a633e18b3d3ddf2bd4f0e55e36e2892
   PINRemoteImage: 308731aa6534500e58fc211b9cc2bb7252df25ba
-  UIImageViewAlignedSwift: e57cc89b4738a82ffad1b76e8ab01f898215bbfb
 
-PODFILE CHECKSUM: 6cb3642858b9b1c392756cde3c1c2d3a978336aa
+PODFILE CHECKSUM: 44942bc21efa142db2630b4aa997fad9a2d61e8d
 
 COCOAPODS: 1.0.1

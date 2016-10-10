@@ -168,7 +168,7 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
     func createTransitionImageView() -> UIImageView {
         let imageView = UIImageView(image: self._imageTransitionZoomable?.image)
 //        imageView.contentMode = (self._imageTransitionZoomable?.contentMode)!
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = false
         

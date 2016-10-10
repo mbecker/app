@@ -13,6 +13,7 @@ target 'app' do
   pod 'Firebase/Storage'
   pod 'Kingfisher', '~> 3.0'
   pod 'ARNTransitionAnimator'
+  pod 'UIImageViewAlignedSwift'
 
   target 'appTests' do
     inherit! :search_paths

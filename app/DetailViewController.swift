@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UIImageViewAlignedSwift
 
 class DetailViewController: UIViewController, ARNImageTransitionZoomable {
     
@@ -21,17 +22,27 @@ class DetailViewController: UIViewController, ARNImageTransitionZoomable {
     
     override func viewWillAppear(_ animated: Bool) {
         self.imageView.image = image
+        self.imageView.clipsToBounds = true
         super.viewWillAppear(animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        
         super.viewWillDisappear(animated)
     }
     
     override func viewDidLoad() {
         self.imageView.image = image
+        
+        print(":: Image size - Detail ::")
+        print(self.imageView.frame)
     }
     
+    @IBAction func didTouch(_ sender: AnyObject) {
+        print(self.image?.size)
+        print(self.imageView.frame)
+        print(self.imageView.image?.size)
+    }
     // MARK: - ARNImageTransitionZoomable
     
     func createTransitionImageView() -> UIImageView {

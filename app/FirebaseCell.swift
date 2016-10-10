@@ -122,6 +122,8 @@ class FirebaseCell: ASCellNode, ASCollectionDelegate, ASCollectionDataSource {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     guard let cell = self.collectionNode?.view.nodeForItem(at: indexPath) as? SpotASCellNode else { return }
+    print(":: Image size ::")
+    print(cell._image.frame)
     delegate?.selectedItem(items[indexPath.item], cell._image)
   }
   

@@ -8,6 +8,7 @@ import Firebase
 import FirebaseDatabase
 import Kingfisher
 import ARNTransitionAnimator
+import ChameleonFramework
 
 let airBnbImageFooterHeight: CGFloat = 58
 let airBnbHeight: CGFloat = 218 + airBnbImageFooterHeight

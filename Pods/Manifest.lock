@@ -8,6 +8,9 @@ PODS:
   - AsyncDisplayKit/PINRemoteImage (2.0-beta.1):
     - AsyncDisplayKit/Core
     - PINRemoteImage/iOS (>= 3.0.0-beta.3)
+  - ChameleonFramework/Default (2.1.0)
+  - ChameleonFramework/Swift (2.1.0):
+    - ChameleonFramework/Default
   - Firebase (3.6.0):
     - Firebase/Core (= 3.6.0)
   - Firebase/Analytics (3.6.0):
@@ -55,6 +58,7 @@ PODS:
 DEPENDENCIES:
   - ARNTransitionAnimator
   - AsyncDisplayKit (from `AsyncDisplayKit`)
+  - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`, branch `swift3`)
   - Firebase
   - Firebase/Auth
   - Firebase/Database
@@ -64,10 +68,19 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   AsyncDisplayKit:
     :path: AsyncDisplayKit
+  ChameleonFramework:
+    :branch: swift3
+    :git: https://github.com/ViccAlexander/Chameleon.git
+
+CHECKOUT OPTIONS:
+  ChameleonFramework:
+    :commit: c400c32eead1c6e74008983c3e7c845ae069b41d
+    :git: https://github.com/ViccAlexander/Chameleon.git
 
 SPEC CHECKSUMS:
   ARNTransitionAnimator: b8b35ce733d08f137eadb0e0c6e53011ea3fb28d
   AsyncDisplayKit: 0bc09eccc8627e05983b89b9b01daf749c552eeb
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Firebase: 34187200ef4979dbd485c7aa685ef078bf587c86
   FirebaseAnalytics: 3f5358d9104adf159cc8d99b7b501e50099a39ad
   FirebaseAuth: 75a062bbf2d3c97d1e6e55bbc110e13a6853e25d
@@ -82,6 +95,6 @@ SPEC CHECKSUMS:
   PINCache: 6911fe422a633e18b3d3ddf2bd4f0e55e36e2892
   PINRemoteImage: 308731aa6534500e58fc211b9cc2bb7252df25ba
 
-PODFILE CHECKSUM: 44942bc21efa142db2630b4aa997fad9a2d61e8d
+PODFILE CHECKSUM: cfdb27e6bd27891572cd9df303c19053003f8370
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.0.rc.2

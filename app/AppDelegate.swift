@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Firebase
+import ChameleonFramework
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         
         // listFonts()
+        
+        Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.flatRed(), withSecondaryColor: UIColor.flatGray(), usingFontName: "HelveticaNeue-Light", andContentStyle: UIContentStyle.light)
         
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.backgroundColor = UIColor.white

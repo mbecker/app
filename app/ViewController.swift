@@ -41,9 +41,12 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
         super.viewDidLoad()
         
         // navigation bar
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(didTapAdd))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(didTapAdd))
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Clear Cache", style: .plain, target: self, action: #selector(didTapClearCache))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Clear Cache", style: .plain, target: self, action: #selector(didTapClearCache))
+        
+        // removing text "back" from statusbar
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         self.tableNode.view.showsVerticalScrollIndicator = false
         self.tableNode.backgroundColor = UIColor.white

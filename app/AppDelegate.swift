@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // listFonts()
         
-        Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.flatRed(), withSecondaryColor: UIColor.flatGray(), usingFontName: "HelveticaNeue-Light", andContentStyle: UIContentStyle.contrast)
+        Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.white, withSecondaryColor: UIColor.flatGray(), usingFontName: "HelveticaNeue", andContentStyle: UIContentStyle.contrast)
         
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.backgroundColor = UIColor.white

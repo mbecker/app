@@ -6,6 +6,7 @@ import UIKit
 import AsyncDisplayKit
 import Firebase
 import FirebaseDatabase
+import FirebaseStorage
 import Kingfisher
 import ARNTransitionAnimator
 import ChameleonFramework
@@ -13,6 +14,7 @@ import ChameleonFramework
 let airBnbImageFooterHeight: CGFloat = 58
 let airBnbHeight: CGFloat = 218 + airBnbImageFooterHeight
 let airBnbInset = UIEdgeInsetsMake(0, 24, 0, 24)
+let airbnbSpacing = 12
 
 
 final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, ASTableDelegate, ARNImageTransitionZoomable, ZoomCellDelegate {
@@ -26,6 +28,7 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
     // MARK: Firebase init
     var ref: FIRDatabaseReference!
     var refs: [FIRDatabaseReference] = [FIRDatabaseReference]()
+    var storage = FIRStorage.storage()
     
     // ARNImageTransitionZoomable
     var _imageTransitionZoomable: ASNetworkImageNode?
@@ -40,17 +43,54 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // navigation bar
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(didTapAdd))
-        
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Clear Cache", style: .plain, target: self, action: #selector(didTapClearCache))
-        
         // removing text "back" from statusbar
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
+        // TableView
         self.tableNode.view.showsVerticalScrollIndicator = false
         self.tableNode.backgroundColor = UIColor.white
         self.tableNode.view.separatorColor = UIColor.clear
+        
+        // View
+        self.tableNode.view.contentInset = UIEdgeInsets(top: 25, left: 0, bottom: 0, right: 0)
+        
+
+        
+        let searchController = UISearchController(searchResultsController: nil)
+//        searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.definesPresentationContext = true
+        searchController.searchBar.sizeToFit()
+//        self.tableNode.view.tableHeaderView = searchController.searchBar
+        
+        let wrapper = ASDisplayNode()
+        wrapper.frame = CGRect(x: 0, y: 0, width: 320, height: 300)
+        wrapper.backgroundColor = UIColor.white
+        wrapper.isAccessibilityElement = false
+        wrapper.accessibilityLabel = "wrapperNode"
+        wrapper.accessibilityIdentifier = "wrapperNode"
+        wrapper.isUserInteractionEnabled = true
+        
+        let buttonAddData = UIButton(frame: CGRect(x: 25, y: 0, width: 150, height: 50))
+        buttonAddData.setBackgroundColor(color: UIColor.flatBlue(), forState: .normal)
+        buttonAddData.setBackgroundColor(color: UIColor.flatBlueColorDark(), forState: .highlighted)
+        buttonAddData.setTitle("Add / Delete", for: .normal)
+        buttonAddData.addTarget(self, action: #selector(didTapAdd), for: .touchUpInside)
+        wrapper.view.addSubview(buttonAddData)
+        
+        let buttonClearCache = UIButton(frame: CGRect(x: self.tableNode.bounds.width - 25 - 150, y: 0, width: 150, height: 50))
+        
+        buttonClearCache.setBackgroundColor(color: UIColor.flatRed(), forState: .normal)
+        buttonClearCache.setBackgroundColor(color: UIColor.flatRedColorDark(), forState: .highlighted)
+        buttonClearCache.setTitle("Clear Cache", for: .normal)
+        buttonClearCache.addTarget(self, action: #selector(didTapClearCache), for: .touchUpInside)
+        wrapper.view.addSubview(buttonClearCache)
+        
+        self.tableNode.view.tableFooterView = wrapper.view
+        self.tableNode.view.tableFooterView?.frame = CGRect(x: 0, y: 0, width: 250, height: 75)
+        
+        
         
         // MARK: Firebase
         ref = FIRDatabase.database().reference()
@@ -64,8 +104,10 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
             print(error.localizedDescription)
         }
         
-        
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -102,37 +144,9 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
     
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.frame = CGRect(x: 0, y: 0, width: self.tableNode.view.bounds.size.width, height: 46)
-        headerView.backgroundColor = UIColor.white
-        headerView.translatesAutoresizingMaskIntoConstraints = true
-        let headerLabel   = UILabel()
-        let myTitle = self.sections[section].name
-        
-        let attributes: NSDictionary = [
-            NSForegroundColorAttributeName: UIColor.black,
-            NSKernAttributeName:CGFloat(0.6)
-        ]
-        let attributedTitle = NSAttributedString(string: myTitle, attributes: attributes as? [String : AnyObject])
-        headerLabel.font  = UIFont(name: "Calibre-Light", size: 24)
-        headerLabel.attributedText = attributedTitle
-        headerLabel.numberOfLines = 1
-        headerLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        let hLabel = UILabel()
-        hLabel.attributedText = attributedTitle
-        
-        headerView.addSubview(headerLabel)
-        
-        //    let verticalConstraint = NSLayoutConstraint(item: headerLabel, attribute: .centerY, relatedBy: .equal, toItem: headerView, attribute: .centerY, multiplier: 1, constant: 0)
-        let leadingMargin = NSLayoutConstraint(item: headerLabel, attribute: .leadingMargin, relatedBy: .equal, toItem: headerView, attribute: .leadingMargin, multiplier: 1, constant: airBnbInset.left)
-        
-        //    NSLayoutConstraint.activate([verticalConstraint])
-        //    headerView.addConstraint(verticalConstraint)
-        
-        headerView.addConstraint(leadingMargin)
-        
-        return headerView
+        let headerNode = SectionHeaderNode(headerText: self.sections[section].name)
+        headerNode.frame = CGRect(x: 0, y: 0, width: self.tableNode.bounds.width, height: 46)
+        return headerNode.view
         
     }
     
@@ -162,14 +176,17 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
         self._imageTransitionZoomable = image
         let storyboard = UIStoryboard(name: "DetailViewController", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        controller.image = self._imageTransitionZoomable?.image
-        controller.title = item.name
+        controller._data = item
+        controller._image = image.image
         self.navigationController?.pushViewController(controller, animated: true)
+        
     }
     
     // MARK: - ARNImageTransitionZoomable
     
     func createTransitionImageView() -> UIImageView {
+        let width = self._imageTransitionZoomable?.image!.accessibilityFrame.width
+        print("__ Image size: \(width)")
         let imageView = UIImageView(image: self._imageTransitionZoomable?.image)
 //        imageView.contentMode = (self._imageTransitionZoomable?.contentMode)!
         imageView.contentMode = .scaleAspectFill

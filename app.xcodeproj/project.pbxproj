@@ -14,6 +14,7 @@
 		D128FC121DA91F7200854982 /* ARNImageTransitionNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D128FC0F1DA91F7200854982 /* ARNImageTransitionNavigationController.swift */; };
 		D128FC151DA91FD300854982 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D128FC131DA91FD300854982 /* DetailViewController.swift */; };
 		D128FC161DA91FD300854982 /* DetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D128FC141DA91FD300854982 /* DetailViewController.storyboard */; };
+		D156E4161DAFF3350059C1CE /* SectionHeaderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156E4151DAFF3350059C1CE /* SectionHeaderNode.swift */; };
 		D171AA2A1DA56AE80074BB28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D171AA291DA56AE80074BB28 /* AppDelegate.swift */; };
 		D171AA321DA56AE90074BB28 /* app.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D171AA301DA56AE80074BB28 /* app.xcdatamodeld */; };
 		D171AA341DA56AE90074BB28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D171AA331DA56AE90074BB28 /* Assets.xcassets */; };
@@ -75,6 +76,7 @@
 		D128FC0F1DA91F7200854982 /* ARNImageTransitionNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARNImageTransitionNavigationController.swift; sourceTree = "<group>"; };
 		D128FC131DA91FD300854982 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		D128FC141DA91FD300854982 /* DetailViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailViewController.storyboard; sourceTree = "<group>"; };
+		D156E4151DAFF3350059C1CE /* SectionHeaderNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionHeaderNode.swift; sourceTree = "<group>"; };
 		D171AA261DA56AE80074BB28 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D171AA291DA56AE80074BB28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D171AA311DA56AE80074BB28 /* app.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = app.xcdatamodel; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				D171AA751DA56CA70074BB28 /* SpotASCellNode.swift */,
 				D128FC131DA91FD300854982 /* DetailViewController.swift */,
 				D128FC141DA91FD300854982 /* DetailViewController.storyboard */,
+				D156E4151DAFF3350059C1CE /* SectionHeaderNode.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -497,7 +500,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2E6291F279BEE5EBFC1A25DB /* [CP] Check Pods Manifest.lock */ = {
@@ -512,7 +515,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		79E5F1872232BFBD6295624E /* [CP] Check Pods Manifest.lock */ = {
@@ -527,7 +530,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		AD5E5532F45E19F2C1436E07 /* [CP] Copy Pods Resources */ = {
@@ -592,6 +595,7 @@
 				D128FC121DA91F7200854982 /* ARNImageTransitionNavigationController.swift in Sources */,
 				D171AA321DA56AE90074BB28 /* app.xcdatamodeld in Sources */,
 				D171AA6C1DA56C4C0074BB28 /* AppData.swift in Sources */,
+				D156E4161DAFF3350059C1CE /* SectionHeaderNode.swift in Sources */,
 				D128FC101DA91F7200854982 /* ARNImageZoomTransition.swift in Sources */,
 				D171AA701DA56C680074BB28 /* FirebaseDatabase.swift in Sources */,
 				D171AA761DA56CA70074BB28 /* SpotASCellNode.swift in Sources */,

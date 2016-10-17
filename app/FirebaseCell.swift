@@ -23,8 +23,6 @@ class FirebaseCell: ASCellNode, ASCollectionDelegate, ASCollectionDataSource {
   var itemSize: CGSize
   
   var items: [SectionData] = [SectionData]()
-    var _images: [Int: ASNetworkImageNode] = [Int: ASNetworkImageNode]()
-  
   
   init(section: Section, sectionSize: CGSize) {
     self.section  = section
@@ -44,8 +42,8 @@ class FirebaseCell: ASCellNode, ASCollectionDelegate, ASCollectionDataSource {
     super.didLoad()
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
-    layout.minimumInteritemSpacing = 0
-    layout.minimumLineSpacing = 12
+    layout.minimumInteritemSpacing = CGFloat(airbnbSpacing)
+    layout.minimumLineSpacing = CGFloat(airbnbSpacing)
     layout.sectionInset = airBnbInset
     layout.itemSize = self.itemSize
     layout.estimatedItemSize = self.itemSize
@@ -107,11 +105,11 @@ class FirebaseCell: ASCellNode, ASCollectionDelegate, ASCollectionDataSource {
   
   func collectionView(_ collectionView: ASCollectionView, nodeBlockForItemAt indexPath: IndexPath) -> ASCellNodeBlock {
     return {
-      let node = SpotASCellNode(cellData: self.items[indexPath.item], cellSize: self.itemSize)
-      node.frame = CGRect(x: 0, y: 0, width: self.itemSize.width, height: self.itemSize.height)
-      node.backgroundColor = UIColor.white
-        self._images[indexPath.item] = node._image
-      return node
+        let node = SpotASCellNode(cellData: self.items[indexPath.item], cellSize: self.itemSize)
+        node.frame = CGRect(x: 0, y: 0, width: self.itemSize.width, height: self.itemSize.height)
+        node.backgroundColor = UIColor.white
+        
+        return node
     }
   }
   
@@ -129,7 +127,7 @@ class FirebaseCell: ASCellNode, ASCollectionDelegate, ASCollectionDataSource {
   
   
   func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-    let pageWidth:CGFloat = scrollView.frame.width - 40 + 4
+    let pageWidth:CGFloat = self.itemSize.width + CGFloat(airbnbSpacing)
     
     let currentOffset:CGFloat = scrollView.contentOffset.x;
     let targetOffset:CGFloat = targetContentOffset.pointee.x
@@ -144,6 +142,8 @@ class FirebaseCell: ASCellNode, ASCollectionDelegate, ASCollectionDataSource {
     if newTargetOffset < 0 {
       newTargetOffset = 0
     } else if newTargetOffset > scrollView.contentSize.width {
+        print(":: newTargetOffset: \(newTargetOffset)")
+        print(":: scrollview.contentSize.width: \(scrollView.contentSize.width)")
       newTargetOffset = scrollView.contentSize.width;
     }
     

@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -30,25 +29,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iXH-hp-etx">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="MTa-Hj-pnP"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="didTouch:" destination="fyW-0E-ate" eventType="touchUpInside" id="myx-dK-Npz"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="f1b-Og-4ki" firstAttribute="top" secondItem="EGg-cO-6OW" secondAttribute="bottom" constant="20" id="1s3-zh-872"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="iXH-hp-etx" secondAttribute="trailing" constant="293" id="914-3r-uNV"/>
                             <constraint firstAttribute="trailing" secondItem="dOI-IR-hqD" secondAttribute="trailing" id="AuZ-1g-kTk"/>
                             <constraint firstItem="EGg-cO-6OW" firstAttribute="top" secondItem="dOI-IR-hqD" secondAttribute="bottom" constant="8" id="CEP-80-Huv"/>
-                            <constraint firstItem="f1b-Og-4ki" firstAttribute="top" secondItem="iXH-hp-etx" secondAttribute="bottom" constant="54" id="GeK-Fq-TNQ"/>
-                            <constraint firstItem="iXH-hp-etx" firstAttribute="top" secondItem="dOI-IR-hqD" secondAttribute="bottom" constant="219" id="c88-hm-tPI"/>
-                            <constraint firstItem="iXH-hp-etx" firstAttribute="leading" secondItem="Zvl-iU-C3z" secondAttribute="leadingMargin" constant="4" id="dto-yN-wfC"/>
                             <constraint firstItem="EGg-cO-6OW" firstAttribute="leading" secondItem="Zvl-iU-C3z" secondAttribute="leading" constant="16" id="kRH-EL-LH5"/>
                             <constraint firstItem="dOI-IR-hqD" firstAttribute="top" secondItem="AVb-J0-vWy" secondAttribute="bottom" id="mnk-YM-lwP"/>
                             <constraint firstItem="dOI-IR-hqD" firstAttribute="leading" secondItem="Zvl-iU-C3z" secondAttribute="leading" id="muo-Ht-GA5"/>
@@ -62,7 +48,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AP1-r7-ZIO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="546.5" y="459.5"/>
+            <point key="canvasLocation" x="546.39999999999998" y="459.22038980509751"/>
         </scene>
     </scenes>
     <resources>

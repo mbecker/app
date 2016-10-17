@@ -7,20 +7,22 @@
 //
 
 import UIKit
+import Kingfisher
+import FirebaseStorage
 
 class DetailViewController: UIViewController, ARNImageTransitionZoomable {
     
     
     @IBOutlet var imageView: UIImageView!
-    var image: UIImage?
-    
+    var _image: UIImage?
+    var _data: SectionData?
+    var storage = FIRStorage.storage()
     
     deinit {
         print("deinit DetailViewController")
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.imageView.image = image
         self.imageView.clipsToBounds = true
         super.viewWillAppear(animated)
     }
@@ -31,21 +33,40 @@ class DetailViewController: UIViewController, ARNImageTransitionZoomable {
     }
     
     override func viewDidLoad() {
-        self.imageView.image = image
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.backIndicatorImage  = UIImage(named: "chevron")
         
-        print(":: Image size - Detail ::")
-        print(self.imageView.frame)
+        self.title = self._data?.name
+        self.imageView.image = self._image
+        
+        // ToDo: The image375x300 is already loadd in cell because of better image quality; load original image
+        // Kingfisher: Load image image375x300
+        if let imageURL: String = self._data?.url, (self._data?.url?.characters.count)! > 0 {
+            
+            let imgRef = self.storage.reference(forURL: imageURL)
+            
+            imgRef.downloadURL(completion: { (storageURL, error) -> Void in
+                if error == nil {
+                    let identifier: String = storageURL!.lastPathComponent
+                    let resource = ImageResource(downloadURL: storageURL!, cacheKey: identifier)
+                    
+                    self.imageView.kf.indicatorType = .activity
+                    self.imageView.kf.indicatorType = .custom(indicator: ActivityIndicator())
+                    self.imageView.kf.setImage(with: resource, placeholder: self._image)
+                    
+                }
+            })
+            
+            
+        }
+
+        
     }
     
-    @IBAction func didTouch(_ sender: AnyObject) {
-        print(self.image?.size)
-        print(self.imageView.frame)
-        print(self.imageView.image?.size)
-    }
     // MARK: - ARNImageTransitionZoomable
     
     func createTransitionImageView() -> UIImageView {
-        let imageView = UIImageView(image: self.imageView.image)
+        let imageView = UIImageView(image: self._image)
         imageView.contentMode = self.imageView.contentMode
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = false
@@ -69,5 +90,32 @@ class DetailViewController: UIViewController, ARNImageTransitionZoomable {
         if !completeTransition {
             self.imageView.isHidden = false
         }
+    }
+}
+
+struct ActivityIndicator: Indicator {
+    let view: UIView = UIView()
+    let indicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    
+    func startAnimatingView() {
+        view.isHidden = false
+    }
+    func stopAnimatingView() {
+        indicator.stopAnimating()
+        view.isHidden = true
+    }
+    
+    init() {
+        indicator.startAnimating()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        
+        let verticalConstraint = NSLayoutConstraint(item: indicator, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1, constant: 0)
+        
+        let horizontalConstraint = NSLayoutConstraint(item: indicator, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1, constant: 0)
+        
+        view.addConstraint(verticalConstraint)
+        view.addConstraint(horizontalConstraint)
+        
+        view.addSubview(indicator)
     }
 }

@@ -131,6 +131,8 @@ final class SpotASCellNode: ASCellNode {
         
         let errorImg = ASOverlayLayoutSpec(child: self._image, overlay: errorSpec)
         
+        
+        
         let imgOverlaySpec = ASOverlayLayoutSpec(child: errorImg, overlay: self._loadingIndicator)
         
         
@@ -145,20 +147,30 @@ final class SpotASCellNode: ASCellNode {
         
         self._profileImage.url = URL(string: "https://randomuser.me/api/portraits/men/72.jpg")
         
-        if let imageURL: String = self.cellData.url as String!, imageURL.characters.count > 0 {
-            let imgRef = self.storage.reference(forURL: imageURL)
-            
-            imgRef.downloadURL(completion: { (storageURL, error) -> Void in
-                if error != nil {
-                    self._image.url = URL(string: "https://error.com")
-                } else {
-                    self._image.url = storageURL
-                }
-            })
+        var imgRef: FIRStorageReference
+        if let imageURL: String = self.cellData.images?["image375x300"] {
+            // Image 337x218 exists
+            imgRef = self.storage.reference(forURL: imageURL)
+            loadImageURL(imgRef: imgRef)
+        } else if let imageURL: String = self.cellData.url as String!, imageURL.characters.count > 0 {
+            // Load original image
+            imgRef = self.storage.reference(forURL: imageURL)
+            loadImageURL(imgRef: imgRef)
         } else {
+            // Show error
             self._image.url = URL(string: "https://error.com")
         }
         
+    }
+    
+    func loadImageURL(imgRef: FIRStorageReference){
+        imgRef.downloadURL(completion: { (storageURL, error) -> Void in
+            if error != nil {
+                self._image.url = URL(string: "https://error.com")
+            } else {
+                self._image.url = storageURL
+            }
+        })
     }
     
     

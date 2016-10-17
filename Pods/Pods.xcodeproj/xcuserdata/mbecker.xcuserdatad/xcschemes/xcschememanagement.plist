@@ -4,17 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>ARNTransitionAnimator.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>AsyncDisplayKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Kingfisher.xcscheme</key>
+		<key>ChameleonFramework.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>LayoutKit.xcscheme</key>
+		<key>Kingfisher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -47,11 +52,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>07088DDF9BDC291421134C4A54669366</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>11A8A8D11CB6532ABE14380C5816E0B7</key>
 		<dict>
 			<key>primary</key>
@@ -72,17 +72,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>5172ACAB7FEA22813859DC97CA0AA16F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>5E50060A9B18001725C409ADDCCEDDD4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9D8414A013D5C8A55188EFB1216801B1</key>
+		<key>6099E27274122C4EF0EDB1BE536BCBCE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DF34274D22A5F36868269B931F549619</key>
+		<key>887A1F399C1C0E18F1B9EEA0FD58F115</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9D8414A013D5C8A55188EFB1216801B1</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Firebase
+import ChameleonFramework
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,9 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // listFonts()
         
+        Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.white, withSecondaryColor: UIColor.flatGray(), usingFontName: "HelveticaNeue", andContentStyle: UIContentStyle.contrast)
+        
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.backgroundColor = UIColor.white
-        window.rootViewController = UINavigationController(rootViewController: ViewController());
+//        window.rootViewController = UINavigationController(rootViewController: ViewController());
+        window.rootViewController = ARNImageTransitionNavigationController(rootViewController: ViewController())
         window.makeKeyAndVisible()
         self.window = window
         return true

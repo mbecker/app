@@ -25,8 +25,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.backgroundColor = UIColor.white
-//        window.rootViewController = UINavigationController(rootViewController: ViewController());
-        window.rootViewController = ARNImageTransitionNavigationController(rootViewController: ViewController())
+        
+        
+        let navigationController = ARNImageTransitionNavigationController(rootViewController: ViewController())
+        navigationController.tabBarItem = UITabBarItem(title: "Park", image: UIImage(named: "picnicTable"), selectedImage: UIImage(named: "picnicTable"))
+        
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [navigationController]
+        tabBarController.tabBar.unselectedItemTintColor = UIColor.flatBlack()
+        tabBarController.tabBar.tintColor = UIColor.flatRed()
+        tabBarController.tabBar.backgroundImage = UIImage.colorForNavBar(color: UIColor.white)
+        
+        
+        window.rootViewController = tabBarController;
         window.makeKeyAndVisible()
         self.window = window
         return true

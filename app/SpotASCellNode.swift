@@ -148,6 +148,7 @@ final class SpotASCellNode: ASCellNode {
         self._profileImage.url = URL(string: "https://randomuser.me/api/portraits/men/72.jpg")
         
         var imgRef: FIRStorageReference
+        
         if let imageURL: String = self.cellData.images?["image375x300"] {
             // Image 337x218 exists
             imgRef = self.storage.reference(forURL: imageURL)

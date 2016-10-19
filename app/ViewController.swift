@@ -10,6 +10,9 @@ import FirebaseStorage
 import Kingfisher
 import ARNTransitionAnimator
 import ChameleonFramework
+import ImagePicker
+import ImageIO
+import ALCameraViewController
 
 let airBnbImageFooterHeight: CGFloat = 58
 let airBnbHeight: CGFloat = 218 + airBnbImageFooterHeight
@@ -17,7 +20,7 @@ let airBnbInset = UIEdgeInsetsMake(0, 24, 0, 24)
 let airbnbSpacing = 12
 
 
-final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, ASTableDelegate, ARNImageTransitionZoomable, ZoomCellDelegate {
+final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, ASTableDelegate, ARNImageTransitionZoomable, ZoomCellDelegate, ImagePickerDelegate {
     
     var sections : [Section] = [Section]()
     
@@ -28,13 +31,16 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
     // MARK: Firebase init
     var ref: FIRDatabaseReference!
     var refs: [FIRDatabaseReference] = [FIRDatabaseReference]()
-    var storage = FIRStorage.storage()
+    var _storage = FIRStorage.storage()
+    var _storageRef: FIRStorageReference
     
     // ARNImageTransitionZoomable
     var _imageTransitionZoomable: ASNetworkImageNode?
     
     
     init() {
+        // Create a root reference
+        self._storageRef = self._storage.reference()
         super.init(node: ASTableNode(style: UITableViewStyle.grouped))
         tableNode.view.asyncDataSource = self
         tableNode.view.asyncDelegate = self
@@ -80,15 +86,28 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
         wrapper.view.addSubview(buttonAddData)
         
         let buttonClearCache = UIButton(frame: CGRect(x: self.tableNode.bounds.width - 25 - 150, y: 0, width: 150, height: 50))
-        
         buttonClearCache.setBackgroundColor(color: UIColor.flatRed(), forState: .normal)
         buttonClearCache.setBackgroundColor(color: UIColor.flatRedColorDark(), forState: .highlighted)
         buttonClearCache.setTitle("Clear Cache", for: .normal)
         buttonClearCache.addTarget(self, action: #selector(didTapClearCache), for: .touchUpInside)
         wrapper.view.addSubview(buttonClearCache)
         
+        let buttonCamera = UIButton(frame: CGRect(x: 25, y: 75, width: 150, height: 50))
+        buttonCamera.setBackgroundColor(color: UIColor.flatLime(), forState: .normal)
+        buttonCamera.setBackgroundColor(color: UIColor.flatLimeColorDark(), forState: .highlighted)
+        buttonCamera.setTitle("Spot!", for: .normal)
+        buttonCamera.addTarget(self, action: #selector(buttonTouched(button:)), for: .touchUpInside)
+        wrapper.view.addSubview(buttonCamera)
+        
+        let buttonCamera2 = UIButton(frame: CGRect(x: self.tableNode.bounds.width - 25 - 150, y: 75, width: 150, height: 50))
+        buttonCamera2.setBackgroundColor(color: UIColor.flatLime(), forState: .normal)
+        buttonCamera2.setBackgroundColor(color: UIColor.flatLimeColorDark(), forState: .highlighted)
+        buttonCamera2.setTitle("Spot2", for: .normal)
+        buttonCamera2.addTarget(self, action: #selector(cameraButtonTouched(button:)), for: .touchUpInside)
+        wrapper.view.addSubview(buttonCamera2)
+        
         self.tableNode.view.tableFooterView = wrapper.view
-        self.tableNode.view.tableFooterView?.frame = CGRect(x: 0, y: 0, width: 250, height: 75)
+        self.tableNode.view.tableFooterView?.frame = CGRect(x: 0, y: 0, width: 250, height: 150)
         
         
         
@@ -277,6 +296,104 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
             self.present(alert, animated: true, completion: nil)
             
         }
+    }
+    
+    func buttonTouched(button: UIButton) {
+        let imagePicker = ImagePickerController()
+        imagePicker.delegate = self
+        Configuration.doneButtonTitle = "Upload Spot"
+        Configuration.cancelButtonTitle = "Cancel Spot"
+        Configuration.recordLocation = true
+        imagePicker.imageLimit = 1
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    
+    func cameraButtonTouched(button: UIButton) {
+        let croppingEnabled = true
+        let cameraViewController = CameraViewController(croppingEnabled: croppingEnabled) { [weak self] image, asset in
+            // Do something with your image here.
+            // If cropping is enabled this image will be the cropped version
+            
+            self?.dismiss(animated: true, completion: nil)
+        }
+        
+        present(cameraViewController, animated: true, completion: nil)
+    }
+    
+    // MARK: - ImagePickerDelegate
+    
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
+    
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        print(":: ImagePicker - wrapperDidPress")
+    }
+    
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        guard images.count > 0 else { return }
+        
+        // Add progress bar
+        let progressView = UIProgressView(frame: CGRect(x: 0, y: 0, width: self.tableNode.frame.width, height: 1))
+        progressView.progressViewStyle = .default
+        progressView.progressTintColor = UIColor.flatRed()
+        progressView.trackTintColor = UIColor.flatWhite()
+        progressView.progress = 0.25
+        self.tabBarController?.tabBar.addSubview(progressView)
+        
+        // Dismiss ImagePicker
+        imagePicker.dismiss(animated: true, completion: nil)
+        
+        // Upload image
+        let imageData = UIImageJPEGRepresentation(images[0], 1.0)                                                               // Get data
+        let imageResizedData = UIImageJPEGRepresentation(images[0].resizedImageWithinRect(rectSize: CGSize(width: 375, height: 300)), 0.6) // Get data from resized image
+        let timestamp = String(Int64(NSDate().timeIntervalSince1970 * 1000))                                                    // Get image name
+        let imageRef = self._storageRef.child("animals/\(timestamp).jpg")                                                       // Get storage reference for new uploaded image with given imagename
+        let imageResizedRef = self._storageRef.child("animals/\(timestamp)_375x300.jpg")                                        // Get storage reference for new uploaded image with given imagename
+        
+        var imageURL: String = String()
+        let metadataForImages = FIRStorageMetadata()
+        metadataForImages.contentType = "image/jpeg"
+        
+        let imageUploadTask = imageRef.put(imageData!, metadata: metadataForImages)
+        
+        imageUploadTask.observe(.progress) { snapshot in
+            // Upload reported progress
+            if let progress = snapshot.progress {
+                let percentComplete: Float = 60 * Float(progress.completedUnitCount) / Float(progress.totalUnitCount)
+                print(":: Upload image 1 - \(percentComplete)")
+                progressView.setProgress(percentComplete / 100, animated: true);
+                
+            }
+        }
+        imageUploadTask.observe(.success) { snapshot in
+            imageURL = (snapshot.metadata?.downloadURL()!.absoluteString)!
+            
+            let imageResizedUploadTask = imageResizedRef.put(imageResizedData!, metadata: metadataForImages)
+            imageResizedUploadTask.observe(.progress) { snapshot in
+                // Upload reported progress
+                if let progress = snapshot.progress {
+                    let percentComplete: Float = 30 * Float(progress.completedUnitCount) / Float(progress.totalUnitCount)
+                    print(":: Upload image  2 - \(percentComplete)")
+                    progressView.setProgress(0.6 + percentComplete / 100, animated: true);
+                    
+                }
+            }
+            imageResizedUploadTask.observe(.success) { snapshot in
+                // Upload completed successfully
+                DatabaseModels().addAnimal(name: timestamp, url: imageURL, resizedURL: (snapshot.metadata?.downloadURL()?.absoluteString)!)
+                progressView.setProgress(1, animated: true)
+                Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (timer) in
+                    progressView.removeFromSuperview()
+                })
+            }
+        }
+        
+        
+        
+        
     }
     
     

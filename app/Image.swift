@@ -19,7 +19,7 @@ extension UIImage {
         self.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
         let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-        return textToImage(drawText: "\(newSize.width)x\(newSize.height)" as NSString, inImage: newImage, atPoint: CGPoint(x: 20, y: 100))
+        return newImage
     }
     
     /// Returns a resized image that fits in rectSize, keeping it's aspect ratio
@@ -35,7 +35,7 @@ extension UIImage {
         
         let newSize = CGSize(width: size.width / resizeFactor, height: size.height / resizeFactor)
         let resized = resizedImage(newSize: newSize)
-        return textToImage(drawText: "RATIO", inImage: resized, atPoint: CGPoint(x: 20, y: 150))
+        return textToImage(drawText: "\(newSize.width)x\(newSize.height)" as NSString, inImage: resized, atPoint: CGPoint(x: 20, y: 20))
     }
     
 }
@@ -43,18 +43,12 @@ extension UIImage {
 func textToImage(drawText: NSString, inImage: UIImage, atPoint: CGPoint) -> UIImage{
     
     // Setup the font specific variables
-    let textColor = UIColor.flatPink()
-    let textFont = UIFont(name: "HelveticaNeue-Bold", size: 12)!
     let font = UIFont.boldSystemFont(ofSize: 16)
     
     // Setup the image context using the passed image
     UIGraphicsBeginImageContextWithOptions(inImage.size, false, 0.0)
     
     // Setup the font attributes that will be later used to dictate how the text should be drawn
-    let textFontAttributes = [
-        NSFontAttributeName: textFont,
-        NSForegroundColorAttributeName: textColor,
-        ] as [String : Any]
     
     let attr = [NSFontAttributeName: font, NSForegroundColorAttributeName:UIColor.white]
     

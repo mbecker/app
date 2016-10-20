@@ -1,4 +1,6 @@
+#ifdef __OBJC__
 #import <UIKit/UIKit.h>
+#endif
 
 #import "NSData+ImageDetectors.h"
 #import "PINImage+DecodedImage.h"
@@ -11,6 +13,8 @@
 #import "PINDataTaskOperation.h"
 #import "PINProgressiveImage.h"
 #import "PINRemoteImage.h"
+#import "PINRemoteImageBasicCache.h"
+#import "PINRemoteImageCaching.h"
 #import "PINRemoteImageCallbacks.h"
 #import "PINRemoteImageCategoryManager.h"
 #import "PINRemoteImageDownloadTask.h"

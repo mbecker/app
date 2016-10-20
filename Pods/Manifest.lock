@@ -1,4 +1,5 @@
 PODS:
+  - ALCameraViewController (1.2.7)
   - ARNTransitionAnimator (1.1.0)
   - AsyncDisplayKit (2.0-beta.1):
     - AsyncDisplayKit/PINRemoteImage (= 2.0-beta.1)
@@ -56,6 +57,7 @@ PODS:
     - PINRemoteImage/Core
 
 DEPENDENCIES:
+  - ALCameraViewController (from `https://github.com/mbecker/ALCameraViewController.git`)
   - ARNTransitionAnimator
   - AsyncDisplayKit (from `AsyncDisplayKit`)
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`, branch `swift3`)
@@ -66,6 +68,8 @@ DEPENDENCIES:
   - Kingfisher (~> 3.0)
 
 EXTERNAL SOURCES:
+  ALCameraViewController:
+    :git: https://github.com/mbecker/ALCameraViewController.git
   AsyncDisplayKit:
     :path: AsyncDisplayKit
   ChameleonFramework:
@@ -73,11 +77,15 @@ EXTERNAL SOURCES:
     :git: https://github.com/ViccAlexander/Chameleon.git
 
 CHECKOUT OPTIONS:
+  ALCameraViewController:
+    :commit: 95d6146c615d686663d48e38f9493ab7c56e6d94
+    :git: https://github.com/mbecker/ALCameraViewController.git
   ChameleonFramework:
     :commit: c400c32eead1c6e74008983c3e7c845ae069b41d
     :git: https://github.com/ViccAlexander/Chameleon.git
 
 SPEC CHECKSUMS:
+  ALCameraViewController: 4a513b8d5ecfdb3f34c50b1d469c373aae1ec7b4
   ARNTransitionAnimator: b8b35ce733d08f137eadb0e0c6e53011ea3fb28d
   AsyncDisplayKit: 0bc09eccc8627e05983b89b9b01daf749c552eeb
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
@@ -95,6 +103,6 @@ SPEC CHECKSUMS:
   PINCache: 6911fe422a633e18b3d3ddf2bd4f0e55e36e2892
   PINRemoteImage: 308731aa6534500e58fc211b9cc2bb7252df25ba
 
-PODFILE CHECKSUM: 4ee422a6282adc246a8a6f9a05bd4205289aa662
+PODFILE CHECKSUM: e4ecc7a48cb9951e7f8be1d487a5d327b3a81f8b
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.0.rc.3

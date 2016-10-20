@@ -14,6 +14,9 @@ target 'app' do
   pod 'Kingfisher', '~> 3.0'
   pod 'ARNTransitionAnimator'
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git', :branch => 'swift3'
+  # pod 'ImagePicker', :git => 'https://github.com/hyperoslo/ImagePicker.git'
+  pod 'ALCameraViewController', :git => 'https://github.com/mbecker/ALCameraViewController.git'
+  # pod 'TOCropViewController', :git => 'https://github.com/TimOliver/TOCropViewController.git'
 
 
   target 'appTests' do

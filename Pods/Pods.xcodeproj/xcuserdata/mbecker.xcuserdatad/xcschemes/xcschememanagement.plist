@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>ALCameraViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>ARNTransitionAnimator.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -82,17 +87,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6099E27274122C4EF0EDB1BE536BCBCE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>887A1F399C1C0E18F1B9EEA0FD58F115</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>9A5CECC100F5FD91C5F46C8D2229DAAB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9D8414A013D5C8A55188EFB1216801B1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DAEFE5845A9A47287B43BE713DFD4B08</key>
 		<dict>
 			<key>primary</key>
 			<true/>

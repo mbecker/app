@@ -301,9 +301,11 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
     func buttonTouched(button: UIButton) {
         let imagePicker = ImagePickerController()
         imagePicker.delegate = self
-        Configuration.doneButtonTitle = "Upload Spot"
-        Configuration.cancelButtonTitle = "Cancel Spot"
+        Configuration.doneButtonTitle = "Upload"
+        Configuration.cancelButtonTitle = "Cancel"
         Configuration.recordLocation = true
+        Configuration.imageLimit = 1
+        
         imagePicker.imageLimit = 1
         
         present(imagePicker, animated: true, completion: nil)
@@ -335,6 +337,25 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
     func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
         guard images.count > 0 else { return }
         
+        var imageAssets: [UIImage] {
+            return AssetManager.resolveAssets(imagePicker.stack.assets)
+        }
+        
+//        imagePicker.dismiss(animated: false) {
+//            self.present(cropViewController, animated: false, completion: nil)
+//        }
+        let imageNode = ASImageNode()
+        
+        imageNode.image = images[0].resizedImageWithinRect(rectSize: CGSize(width: 375, height: 300))
+        imageNode.frame = CGRect(x: 0, y: 0, width: 375, height: 300)
+        
+        self.tableNode.addSubnode(imageNode)
+        imagePicker.dismiss(animated: false, completion: nil)
+//        processImages(imagePicker: imagePicker, images: images)
+        
+    }
+    
+    func processImages(imagePicker: ImagePickerController, images: [UIImage]){
         // Add progress bar
         let progressView = UIProgressView(frame: CGRect(x: 0, y: 0, width: self.tableNode.frame.width, height: 1))
         progressView.progressViewStyle = .default
@@ -390,10 +411,6 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
                 })
             }
         }
-        
-        
-        
-        
     }
     
     

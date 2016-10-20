@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A263199C88D6AE53EC3D6B703DBB64B5A3DAF5FB",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "A263199C88D6AE53EC3D6B703DBB64B5A3DAF5FB" : 9223372036854775807,
+    "B763FC9623928D804BC7C9A73D90792E4628A1CE" : 9223372036854775807,
+    "EBF9236F7ED7963EA21B6A80B0DA4EDCCFA2B7DF" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "28EC1F33-D52A-4CF2-92BF-123EC413304A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "A263199C88D6AE53EC3D6B703DBB64B5A3DAF5FB" : "app\/",
+    "B763FC9623928D804BC7C9A73D90792E4628A1CE" : "app\/libs\/ImagePicker\/",
+    "EBF9236F7ED7963EA21B6A80B0DA4EDCCFA2B7DF" : "app\/TOCropViewController\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "app",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "app.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mbecker\/app.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A263199C88D6AE53EC3D6B703DBB64B5A3DAF5FB"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mbecker\/ImagePicker.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B763FC9623928D804BC7C9A73D90792E4628A1CE"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mbecker\/TOCropViewController.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EBF9236F7ED7963EA21B6A80B0DA4EDCCFA2B7DF"
+    }
+  ]
+}

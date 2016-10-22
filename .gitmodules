@@ -1,0 +1,6 @@
+[submodule "ImagePicker"]
+	path = ImagePicker
+	url = https://github.com/mbecker/ImagePicker.git
+[submodule "TOCropViewController"]
+	path = TOCropViewController
+	url = https://github.com/mbecker/TOCropViewController

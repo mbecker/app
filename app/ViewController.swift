@@ -22,6 +22,8 @@ let airbnbSpacing = 12
 
 final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, ASTableDelegate, ARNImageTransitionZoomable, ZoomCellDelegate, ImagePickerDelegate {
     
+
+    
     var sections : [Section] = [Section]()
     
     var tableNode: ASTableNode {
@@ -48,6 +50,17 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let imagePicker = ImagePickerController()
+        imagePicker.delegate = self
+        Configuration.doneButtonTitle = "Upload"
+        Configuration.cancelButtonTitle = "Cancel"
+        Configuration.recordLocation = true
+        Configuration.imageLimit = 1
+        
+        imagePicker.imageLimit = 1
+        
+        present(imagePicker, animated: true, completion: nil)
         
         // removing text "back" from statusbar
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -334,16 +347,16 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
         print(":: ImagePicker - wrapperDidPress")
     }
     
-    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+    public func doneButtonDidPress(_ imagePicker: ImagePickerController, original: [UIImage], images: [UIImage]) {
         guard images.count > 0 else { return }
         
         var imageAssets: [UIImage] {
             return AssetManager.resolveAssets(imagePicker.stack.assets)
         }
         
-//        imagePicker.dismiss(animated: false) {
-//            self.present(cropViewController, animated: false, completion: nil)
-//        }
+        //        imagePicker.dismiss(animated: false) {
+        //            self.present(cropViewController, animated: false, completion: nil)
+        //        }
         let imageNode = ASImageNode()
         
         imageNode.image = images[0].resizedImageWithinRect(rectSize: CGSize(width: 375, height: 300))
@@ -351,8 +364,8 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
         
         self.tableNode.addSubnode(imageNode)
         imagePicker.dismiss(animated: false, completion: nil)
-//        processImages(imagePicker: imagePicker, images: images)
-        
+        //        processImages(imagePicker: imagePicker, images: images)
+
     }
     
     func processImages(imagePicker: ImagePickerController, images: [UIImage]){

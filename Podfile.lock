@@ -12,6 +12,7 @@ PODS:
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
+  - Eureka (2.0.0-beta.1)
   - Firebase (3.6.0):
     - Firebase/Core (= 3.6.0)
   - Firebase/Analytics (3.6.0):
@@ -61,6 +62,7 @@ DEPENDENCIES:
   - ARNTransitionAnimator
   - AsyncDisplayKit (from `AsyncDisplayKit`)
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`, branch `swift3`)
+  - Eureka (~> 2.0.0-beta.1)
   - Firebase
   - Firebase/Auth
   - Firebase/Database
@@ -89,6 +91,7 @@ SPEC CHECKSUMS:
   ARNTransitionAnimator: b8b35ce733d08f137eadb0e0c6e53011ea3fb28d
   AsyncDisplayKit: 0bc09eccc8627e05983b89b9b01daf749c552eeb
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  Eureka: d014adf16406745e1a78d5790ea37ed130a0a8e5
   Firebase: 34187200ef4979dbd485c7aa685ef078bf587c86
   FirebaseAnalytics: 3f5358d9104adf159cc8d99b7b501e50099a39ad
   FirebaseAuth: 75a062bbf2d3c97d1e6e55bbc110e13a6853e25d
@@ -103,6 +106,6 @@ SPEC CHECKSUMS:
   PINCache: 6911fe422a633e18b3d3ddf2bd4f0e55e36e2892
   PINRemoteImage: 308731aa6534500e58fc211b9cc2bb7252df25ba
 
-PODFILE CHECKSUM: e4ecc7a48cb9951e7f8be1d487a5d327b3a81f8b
+PODFILE CHECKSUM: 389f8001d7d6a05187a7c1e97577c24d694c3ed5
 
 COCOAPODS: 1.1.0.rc.3

@@ -12,7 +12,7 @@
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "28EC1F33-D52A-4CF2-92BF-123EC413304A",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "EBF9236F7ED7963EA21B6A80B0DA4EDCCFA2B7DF" : "app\/TOCropViewController\/",
-    "B763FC9623928D804BC7C9A73D90792E4628A1CE" : "app\/libs\/ImagePicker\/",
+    "B763FC9623928D804BC7C9A73D90792E4628A1CE" : "app\/ImagePicker\/",
     "83BADBC5501CE21C43EFAD0B4239602133296C18" : "app\/Eureka\/",
     "A263199C88D6AE53EC3D6B703DBB64B5A3DAF5FB" : "app\/"
   },

@@ -4,3 +4,6 @@
 [submodule "TOCropViewController"]
 	path = TOCropViewController
 	url = https://github.com/mbecker/TOCropViewController
+[submodule "Eureka"]
+	path = Eureka
+	url = https://github.com/xmartlabs/Eureka.git

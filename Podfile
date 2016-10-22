@@ -15,7 +15,7 @@ target 'app' do
   pod 'ARNTransitionAnimator'
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git', :branch => 'swift3'
   # pod 'ImagePicker', :git => 'https://github.com/hyperoslo/ImagePicker.git'
-  pod 'ALCameraViewController', :git => 'https://github.com/mbecker/ALCameraViewController.git'
+  # pod 'ALCameraViewController', :git => 'https://github.com/mbecker/ALCameraViewController.git'
   # pod 'TOCropViewController', :git => 'https://github.com/TimOliver/TOCropViewController.git'
   pod 'Eureka', '~> 2.0.0-beta.1'
 

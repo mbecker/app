@@ -12,7 +12,6 @@ import ARNTransitionAnimator
 import ChameleonFramework
 import ImagePicker
 import ImageIO
-import ALCameraViewController
 
 let airBnbImageFooterHeight: CGFloat = 58
 let airBnbHeight: CGFloat = 218 + airBnbImageFooterHeight
@@ -53,11 +52,8 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
         
         let imagePicker = ImagePickerController()
         imagePicker.delegate = self
-        Configuration.doneButtonTitle = "Upload"
-        Configuration.cancelButtonTitle = "Cancel"
         Configuration.recordLocation = true
         Configuration.imageLimit = 1
-        
         imagePicker.imageLimit = 1
         
         present(imagePicker, animated: true, completion: nil)
@@ -111,13 +107,6 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
         buttonCamera.setTitle("Spot!", for: .normal)
         buttonCamera.addTarget(self, action: #selector(buttonTouched(button:)), for: .touchUpInside)
         wrapper.view.addSubview(buttonCamera)
-        
-        let buttonCamera2 = UIButton(frame: CGRect(x: self.tableNode.bounds.width - 25 - 150, y: 75, width: 150, height: 50))
-        buttonCamera2.setBackgroundColor(color: UIColor.flatLime(), forState: .normal)
-        buttonCamera2.setBackgroundColor(color: UIColor.flatLimeColorDark(), forState: .highlighted)
-        buttonCamera2.setTitle("Spot2", for: .normal)
-        buttonCamera2.addTarget(self, action: #selector(cameraButtonTouched(button:)), for: .touchUpInside)
-        wrapper.view.addSubview(buttonCamera2)
         
         self.tableNode.view.tableFooterView = wrapper.view
         self.tableNode.view.tableFooterView?.frame = CGRect(x: 0, y: 0, width: 250, height: 150)
@@ -322,19 +311,6 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
         imagePicker.imageLimit = 1
         
         present(imagePicker, animated: true, completion: nil)
-    }
-    
-    
-    func cameraButtonTouched(button: UIButton) {
-        let croppingEnabled = true
-        let cameraViewController = CameraViewController(croppingEnabled: croppingEnabled) { [weak self] image, asset in
-            // Do something with your image here.
-            // If cropping is enabled this image will be the cropped version
-            
-            self?.dismiss(animated: true, completion: nil)
-        }
-        
-        present(cameraViewController, animated: true, completion: nil)
     }
     
     // MARK: - ImagePickerDelegate

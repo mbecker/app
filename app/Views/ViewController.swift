@@ -50,13 +50,7 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let imagePicker = ImagePickerController()
-        imagePicker.delegate = self
-        Configuration.recordLocation = true
-        Configuration.imageLimit = 1
-        imagePicker.imageLimit = 1
-        
-        present(imagePicker, animated: true, completion: nil)
+        showCamera()
         
         // removing text "back" from statusbar
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -301,16 +295,7 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
     }
     
     func buttonTouched(button: UIButton) {
-        let imagePicker = ImagePickerController()
-        imagePicker.delegate = self
-        Configuration.doneButtonTitle = "Upload"
-        Configuration.cancelButtonTitle = "Cancel"
-        Configuration.recordLocation = true
-        Configuration.imageLimit = 1
-        
-        imagePicker.imageLimit = 1
-        
-        present(imagePicker, animated: true, completion: nil)
+        showCamera()
     }
     
     // MARK: - ImagePickerDelegate
@@ -400,6 +385,16 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
                 })
             }
         }
+    }
+    
+    func showCamera(){
+        let imagePicker = ImagePickerController()
+        imagePicker.delegate = self
+        Configuration.recordLocation = true
+        Configuration.imageLimit = 1
+        imagePicker.imageLimit = 1
+        
+        present(imagePicker, animated: true, completion: nil)
     }
     
     

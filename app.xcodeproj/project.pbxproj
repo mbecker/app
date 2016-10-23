@@ -155,7 +155,7 @@
 		D171AA891DA575070074BB28 /* Calibre-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibre-ThinItalic.otf"; sourceTree = "<group>"; };
 		D1B8F7B01DB7ACB000E32808 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		D1B8F7B21DB7ACB800E32808 /* DatabaseModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseModels.swift; sourceTree = "<group>"; };
-		D1B8F7B41DB7ACC200E32808 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D1B8F7B41DB7ACC200E32808 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = app/README.md; sourceTree = "<group>"; };
 		D1B8F7B81DB7AE4200E32808 /* ImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ImagePicker.xcodeproj; path = ImagePicker/ImagePicker.xcodeproj; sourceTree = "<group>"; };
 		E140BDFF9D30821D12FB94EA /* Pods-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app.release.xcconfig"; path = "Pods/Target Support Files/Pods-app/Pods-app.release.xcconfig"; sourceTree = "<group>"; };
 		E34F458A3899A7A598E72295 /* Pods-appUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-appUITests/Pods-appUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -228,6 +228,7 @@
 		D171AA1D1DA56AE80074BB28 = {
 			isa = PBXGroup;
 			children = (
+				D1B8F7B41DB7ACC200E32808 /* README.md */,
 				4E33BAE23A29408941380AD9 /* Frameworks */,
 				0AA4025FCB310F274D3540BD /* Pods */,
 				D171AA271DA56AE80074BB28 /* Products */,
@@ -260,7 +261,6 @@
 				D171AA331DA56AE90074BB28 /* Assets.xcassets */,
 				D171AA7A1DA574D20074BB28 /* Helpers.swift */,
 				D171AA351DA56AE90074BB28 /* LaunchScreen.storyboard */,
-				D1B8F7B41DB7ACC200E32808 /* README.md */,
 				D171AA301DA56AE80074BB28 /* app.xcdatamodeld */,
 			);
 			path = app;

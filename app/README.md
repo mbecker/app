@@ -27,3 +27,8 @@ git clone git://github.com/schacon/myproject.git
 git submodule init
 git submodule update
 ```
+
+Remove .DS_STORE
+```
+find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-unmatch
+```

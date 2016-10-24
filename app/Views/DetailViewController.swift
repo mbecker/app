@@ -109,13 +109,15 @@ struct ActivityIndicator: Indicator {
         indicator.startAnimating()
         indicator.translatesAutoresizingMaskIntoConstraints = false
         
+        
         let verticalConstraint = NSLayoutConstraint(item: indicator, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1, constant: 0)
         
         let horizontalConstraint = NSLayoutConstraint(item: indicator, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1, constant: 0)
         
-        view.addConstraint(verticalConstraint)
-        view.addConstraint(horizontalConstraint)
+        self.view.addConstraint(verticalConstraint)
+        self.view.addConstraint(horizontalConstraint)
         
-        view.addSubview(indicator)
+        self.view.addSubview(indicator)
     }
+    
 }

@@ -49,6 +49,7 @@
 		D1B8F7B11DB7ACB000E32808 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B8F7B01DB7ACB000E32808 /* Image.swift */; };
 		D1B8F7B31DB7ACB800E32808 /* DatabaseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B8F7B21DB7ACB800E32808 /* DatabaseModels.swift */; };
 		D1B8F7B51DB7ACC200E32808 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D1B8F7B41DB7ACC200E32808 /* README.md */; };
+		D1B9392E1DBE2FFA000AFB8A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B9392D1DBE2FFA000AFB8A /* TabBarController.swift */; };
 		F1D66AD9EC29977070824FEA /* Pods_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708292EF6BC3E087DADC69B5 /* Pods_app.framework */; };
 /* End PBXBuildFile section */
 
@@ -157,6 +158,7 @@
 		D1B8F7B21DB7ACB800E32808 /* DatabaseModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseModels.swift; sourceTree = "<group>"; };
 		D1B8F7B41DB7ACC200E32808 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = app/README.md; sourceTree = "<group>"; };
 		D1B8F7B81DB7AE4200E32808 /* ImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ImagePicker.xcodeproj; path = ImagePicker/ImagePicker.xcodeproj; sourceTree = "<group>"; };
+		D1B9392D1DBE2FFA000AFB8A /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		E140BDFF9D30821D12FB94EA /* Pods-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app.release.xcconfig"; path = "Pods/Target Support Files/Pods-app/Pods-app.release.xcconfig"; sourceTree = "<group>"; };
 		E34F458A3899A7A598E72295 /* Pods-appUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-appUITests/Pods-appUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -314,6 +316,7 @@
 				D156E4151DAFF3350059C1CE /* SectionHeaderNode.swift */,
 				D171AA751DA56CA70074BB28 /* SpotASCellNode.swift */,
 				D171AA711DA56C9D0074BB28 /* ViewController.swift */,
+				D1B9392D1DBE2FFA000AFB8A /* TabBarController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -677,6 +680,7 @@
 				D171AA6E1DA56C630074BB28 /* KingfisherCache.swift in Sources */,
 				D1B8F7B11DB7ACB000E32808 /* Image.swift in Sources */,
 				D171AA741DA56CA20074BB28 /* FirebaseCell.swift in Sources */,
+				D1B9392E1DBE2FFA000AFB8A /* TabBarController.swift in Sources */,
 				D171AA2A1DA56AE80074BB28 /* AppDelegate.swift in Sources */,
 				D171AA7B1DA574D20074BB28 /* Helpers.swift in Sources */,
 				D1B8F7B31DB7ACB800E32808 /* DatabaseModels.swift in Sources */,

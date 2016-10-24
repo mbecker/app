@@ -185,7 +185,7 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
         
     }
     
-    // MARK: - CustomCellDelegate
+    // MARK: - CustomCellDelegate: Show detail
     
     func selectedItem(_ item:SectionData, _ image:ASNetworkImageNode){
         self._imageTransitionZoomable = image
@@ -194,7 +194,6 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
         controller._data = item
         controller._image = image.image
         self.navigationController?.pushViewController(controller, animated: true)
-        
     }
     
     // MARK: - ARNImageTransitionZoomable
@@ -301,13 +300,16 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
     // MARK: - ImagePickerDelegate
     
     func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
-        imagePicker.dismiss(animated: true, completion: nil)
+//        imagePicker.dismiss(animated: true, completion: nil)
+        self.tabBarController?.dismiss(animated: false, completion: nil)
     }
     
     func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
         print(":: ImagePicker - wrapperDidPress")
     }
     
+    
+    // ImagePicker done
     public func doneButtonDidPress(_ imagePicker: ImagePickerController, original: [UIImage], images: [UIImage]) {
         guard images.count > 0 else { return }
         
@@ -315,16 +317,14 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
             return AssetManager.resolveAssets(imagePicker.stack.assets)
         }
         
-        //        imagePicker.dismiss(animated: false) {
-        //            self.present(cropViewController, animated: false, completion: nil)
-        //        }
         let imageNode = ASImageNode()
         
         imageNode.image = images[0].resizedImageWithinRect(rectSize: CGSize(width: 375, height: 300))
         imageNode.frame = CGRect(x: 0, y: 0, width: 375, height: 300)
         
         self.tableNode.addSubnode(imageNode)
-        imagePicker.dismiss(animated: false, completion: nil)
+        
+        self.tabBarController?.dismiss(animated: false, completion: nil)
         //        processImages(imagePicker: imagePicker, images: images)
 
     }
@@ -387,6 +387,8 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
         }
     }
     
+    
+    
     func showCamera(){
         let imagePicker = ImagePickerController()
         imagePicker.delegate = self
@@ -394,7 +396,11 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
         Configuration.imageLimit = 1
         imagePicker.imageLimit = 1
         
-        present(imagePicker, animated: true, completion: nil)
+        let imageNavcontroller = UINavigationController(rootViewController: imagePicker)
+        imageNavcontroller.isNavigationBarHidden = true
+        self.tabBarController?.show(imageNavcontroller, sender: nil)
+        
+//        present(imagePicker, animated: true, completion: nil)
     }
     
     

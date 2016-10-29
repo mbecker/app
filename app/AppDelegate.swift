@@ -42,6 +42,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = window
         return true
     }
+    
+    func application(_ application: UIApplication, willChangeStatusBarFrame newStatusBarFrame: CGRect) {
+        if (newStatusBarFrame.size.height < 40) {
+            if let window = self.window, let subviews = self.window?.subviews {
+                for view in subviews {
+                    UIView.animate(withDuration: 0.6, animations: {
+                        view.frame = window.bounds
+                    })
+                }
+            }
+        }
+    }
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

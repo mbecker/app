@@ -19,11 +19,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Eureka.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Kingfisher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -87,7 +82,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>873B1A0D84F1FF2C0ECD8A2440705B43</key>
+		<key>6099E27274122C4EF0EDB1BE536BCBCE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -98,11 +93,6 @@
 			<true/>
 		</dict>
 		<key>9D8414A013D5C8A55188EFB1216801B1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DFA7EE8479FC12F18AC0B2DF0B25967D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

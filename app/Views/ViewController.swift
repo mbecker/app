@@ -65,12 +65,12 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
         
 
         
-        let searchController = UISearchController(searchResultsController: nil)
+//        let searchController = UISearchController(searchResultsController: nil)
 //        searchController.searchResultsUpdater = self
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.definesPresentationContext = true
-        searchController.searchBar.sizeToFit()
+//        searchController.hidesNavigationBarDuringPresentation = false
+//        searchController.dimsBackgroundDuringPresentation = false
+//        searchController.definesPresentationContext = true
+//        searchController.searchBar.sizeToFit()
 //        self.tableNode.view.tableHeaderView = searchController.searchBar
         
         let wrapper = ASDisplayNode()
@@ -397,7 +397,6 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
         imagePicker.imageLimit = 1
         
         let imageNavcontroller = UINavigationController(rootViewController: imagePicker)
-        imageNavcontroller.isNavigationBarHidden = true
         self.tabBarController?.show(imageNavcontroller, sender: nil)
         
 //        present(imagePicker, animated: true, completion: nil)

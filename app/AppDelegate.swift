@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FIRApp.configure()
         
-        // listFonts()
+        listFonts()
         
         Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.white, withSecondaryColor: UIColor.flatGray(), usingFontName: "HelveticaNeue", andContentStyle: UIContentStyle.contrast)
         
@@ -36,8 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarController.tabBar.tintColor = UIColor.flatRed()
         tabBarController.tabBar.backgroundImage = UIImage.colorForNavBar(color: UIColor.white)
         
+        let tabBar = TabBarController()
         
-        window.rootViewController = tabBarController;
+        window.rootViewController = tabBar
         window.makeKeyAndVisible()
         self.window = window
         return true

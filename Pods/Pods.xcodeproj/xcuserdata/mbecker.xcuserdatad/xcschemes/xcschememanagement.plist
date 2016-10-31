@@ -34,6 +34,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>PMAlertController-PMAlertController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>PMAlertController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-app.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -62,6 +72,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>33AB9B3D36FDCF5A8112785CA09550FB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3A7C64F5F8152BC686739336C48DD166</key>
 		<dict>
 			<key>primary</key>
@@ -82,17 +97,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6099E27274122C4EF0EDB1BE536BCBCE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>887A1F399C1C0E18F1B9EEA0FD58F115</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>9D8414A013D5C8A55188EFB1216801B1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C2AB96F7E8DD8856CD05BD74C0ABBF9C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E5AB1C0293AFBBE30818EC1F7565FA51</key>
 		<dict>
 			<key>primary</key>
 			<true/>

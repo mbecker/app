@@ -149,18 +149,19 @@ final class SpotASCellNode: ASCellNode {
         
         var imgRef: FIRStorageReference
         
-        if let imageURL: String = self.cellData.images?["image375x300"] {
-            // Image 337x218 exists
+        if let imageURL: String = self.cellData.url as String!, imageURL.characters.count > 0 {
+            // cellData.url is resized image 3750x300
             imgRef = self.storage.reference(forURL: imageURL)
             loadImageURL(imgRef: imgRef)
-        } else if let imageURL: String = self.cellData.url as String!, imageURL.characters.count > 0 {
-            // Load original image
+        } else if let imageURL: String = self.cellData.images?["original"], imageURL.characters.count > 0 {
+            // resized image doesn't exist -> Load "original" image
             imgRef = self.storage.reference(forURL: imageURL)
             loadImageURL(imgRef: imgRef)
         } else {
             // Show error
             self._image.url = URL(string: "https://error.com")
         }
+        
         
     }
     

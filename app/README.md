@@ -32,3 +32,7 @@ Remove .DS_STORE
 ```
 find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-unmatch
 ```
+
+
+## ToDo
+- Get park location from settings to show specific information like GPS Location, which animals, etc. (at which park is the user?)

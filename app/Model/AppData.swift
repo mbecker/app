@@ -25,6 +25,8 @@ struct SectionData {
     let ref:  FIRDatabaseReference
     let name: String
     let url:  String?
+    let tags: [String]?
+    let location: [String: Double]
     let images: [String: String]?
     var imagesRef = [String: URL]()
     let storage:            FIRStorage
@@ -38,6 +40,9 @@ struct SectionData {
         self.name         = snapshotValue["name"] as! String
         self.url          = snapshotValue["url"] as? String
         self.images         = snapshotValue["images"] as? [String: String]
+        
+        self.tags           = snapshotValue["tags"] as? [String]
+        self.location       = (snapshotValue["location"] as? [String: Double])!
         
         /*
          image375x300

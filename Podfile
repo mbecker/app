@@ -18,6 +18,7 @@ target 'app' do
   # pod 'ALCameraViewController', :git => 'https://github.com/mbecker/ALCameraViewController.git'
   # pod 'TOCropViewController', :git => 'https://github.com/TimOliver/TOCropViewController.git'
   pod 'Mapbox-iOS-SDK', '~> 3.3.4'
+  pod 'PMAlertController'
 
 
   target 'appTests' do

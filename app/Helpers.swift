@@ -43,6 +43,72 @@ extension Int
     }
 }
 
+extension String {
+    
+    func range(from: Int, to: Int) -> String {
+        let offset = to - self.characters.count
+        let start = self.index(self.startIndex, offsetBy: from)
+        let end = self.index(self.endIndex, offsetBy: offset)
+        let range = start..<end
+        return self[range]
+    }
+}
+
+extension NSAttributedString {
+    class func attributedStringForTitleText(text: String) -> NSAttributedString {
+        let titleAttributes =
+            [NSFontAttributeName: UIFont(name: "AvenirNext-Heavy", size: 24)!,
+             NSForegroundColorAttributeName: UIColor.black,
+             NSParagraphStyleAttributeName: NSParagraphStyle.justifiedParagraphStyle()]
+        return NSAttributedString(string: text, attributes: titleAttributes)
+    }
+    
+    class func attributedStringForSubtitleText(text: String) -> NSAttributedString {
+        let titleAttributes =
+            [NSFontAttributeName: UIFont(name: "AvenirNext-DemiBold", size: 18)!,
+             NSForegroundColorAttributeName: UIColor.black,
+             NSShadowAttributeName: NSShadow.descriptionTextShadow(),
+             NSParagraphStyleAttributeName: NSParagraphStyle.justifiedParagraphStyle()]
+        return NSAttributedString(string: text, attributes: titleAttributes)
+    }
+    
+    class func attributedStringForDescriptionText(text: String) -> NSAttributedString {
+        let descriptionAttributes =
+            [NSFontAttributeName: UIFont(name: "AvenirNext-Medium", size: 14)!,
+             NSForegroundColorAttributeName: UIColor.black,
+             NSForegroundColorAttributeName: UIColor.white,
+             NSBackgroundColorAttributeName: UIColor.clear,
+             NSParagraphStyleAttributeName: NSParagraphStyle.justifiedParagraphStyle()]
+        return NSAttributedString(string: text, attributes: descriptionAttributes)
+    }
+}
+
+extension NSParagraphStyle {
+    class func justifiedParagraphStyle() -> NSParagraphStyle {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .justified
+        return paragraphStyle.copy() as! NSParagraphStyle
+    }
+}
+extension NSShadow {
+    class func titleTextShadow() -> NSShadow {
+        let shadow = NSShadow()
+        shadow.shadowColor = UIColor(hue: 0, saturation: 0, brightness: 0, alpha: 0.3)
+        shadow.shadowOffset = CGSize(width: 0, height: 2)
+        shadow.shadowBlurRadius = 3.0
+        return shadow
+    }
+    
+    class func descriptionTextShadow() -> NSShadow {
+        let shadow = NSShadow()
+        shadow.shadowColor = UIColor(white: 0.0, alpha: 0.3)
+        shadow.shadowOffset = CGSize(width: 0, height: 1)
+        shadow.shadowBlurRadius = 3.0
+        return shadow
+    }
+}
+
+
 extension UIButton {
     func setBackgroundColor(color: UIColor, forState: UIControlState) {
         UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))

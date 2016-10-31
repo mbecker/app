@@ -10,6 +10,10 @@ import AsyncDisplayKit
 import FirebaseDatabase
 import FirebaseStorage
 
+protocol ZoomCellDelegate: class {
+    func selectedItem(_ item: SectionData, _ image:ASNetworkImageNode)
+}
+
 class FirebaseCell: ASCellNode, ASCollectionDelegate, ASCollectionDataSource {
   
   weak var delegate:ZoomCellDelegate?
@@ -55,6 +59,7 @@ class FirebaseCell: ASCellNode, ASCollectionDelegate, ASCollectionDataSource {
     self.collectionNode!.frame = self.frame
     self.collectionNode!.view.asyncDelegate = self
     self.collectionNode!.view.asyncDataSource = self
+//    self.collectionNode!.view.allowsSelection = false
     self.collectionNode!.view.showsHorizontalScrollIndicator = false
     self.collectionNode!.view.backgroundColor = UIColor.white
     self.collectionNode!.borderWidth = 0.0
@@ -153,10 +158,6 @@ class FirebaseCell: ASCellNode, ASCollectionDelegate, ASCollectionDataSource {
   }
   
   
-}
-
-protocol ZoomCellDelegate: class {
-    func selectedItem(_ item: SectionData, _ image:ASNetworkImageNode)
 }
 
 extension Date {

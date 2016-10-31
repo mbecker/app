@@ -13,6 +13,8 @@ import FirebaseStorage
 class DetailViewController: UIViewController, ARNImageTransitionZoomable {
     
     
+    @IBOutlet var tagsView: UITextView!
+    @IBOutlet var locationView: UITextView!
     @IBOutlet var imageView: UIImageView!
     var _image: UIImage?
     var _data: SectionData?
@@ -40,28 +42,43 @@ class DetailViewController: UIViewController, ARNImageTransitionZoomable {
         self.title = self._data?.name
         self.imageView.image = self._image
         
-        // ToDo: The image375x300 is already loadd in cell because of better image quality; load original image
-        // Kingfisher: Load image image375x300
-        if let imageURL: String = self._data?.url, (self._data?.url?.characters.count)! > 0 {
-            
-            let imgRef = self.storage.reference(forURL: imageURL)
-            
-            imgRef.downloadURL(completion: { (storageURL, error) -> Void in
-                if error == nil {
-                    let identifier: String = storageURL!.lastPathComponent
-                    let resource = ImageResource(downloadURL: storageURL!, cacheKey: identifier)
-                    
-                    self.imageView.kf.indicatorType = .activity
-                    self.imageView.kf.indicatorType = .custom(indicator: ActivityIndicator())
-                    self.imageView.kf.setImage(with: resource, placeholder: self._image)
-                    
-                }
-            })
-            
-            
-        }
-
         
+        self.tagsView.text = self._data?.tags?.joined(separator: ", ")
+        self.locationView.text = String(describing: self._data!.location["latitude"]!) + " - " + String(describing: self._data!.location["longitude"]!)
+        
+        var imgRef: FIRStorageReference
+        
+        if let imageURL: String = self._data?.url as String!, imageURL.characters.count > 0 {
+            // _data is resized image 3750x300
+            imgRef = self.storage.reference(forURL: imageURL)
+            loadImageURL(imgRef: imgRef)
+        } else if let imageURL: String = self._data?.images?["original"], imageURL.characters.count > 0 {
+            // resized image doesn't exist -> Load "original" image
+            imgRef = self.storage.reference(forURL: imageURL)
+            loadImageURL(imgRef: imgRef)
+        } else {
+            // ToDO: Show error
+            let errorLabel = UILabel()
+            errorLabel.text = "No uploaded image exists..."
+            errorLabel.sizeToFit()
+            self.imageView.addSubview(errorLabel)
+        }
+        
+        
+    }
+    
+    func loadImageURL(imgRef: FIRStorageReference){
+        imgRef.downloadURL(completion: { (storageURL, error) -> Void in
+            if error == nil {
+                let identifier: String = storageURL!.lastPathComponent
+                let resource = ImageResource(downloadURL: storageURL!, cacheKey: identifier)
+                
+                self.imageView.kf.indicatorType = .activity
+                self.imageView.kf.indicatorType = .custom(indicator: ActivityIndicator())
+                self.imageView.kf.setImage(with: resource, placeholder: self._image)
+                
+            }
+        })
     }
     
     // MARK: - ARNImageTransitionZoomable

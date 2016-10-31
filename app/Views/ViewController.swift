@@ -6,12 +6,7 @@ import UIKit
 import AsyncDisplayKit
 import Firebase
 import FirebaseDatabase
-import FirebaseStorage
-import Kingfisher
 import ARNTransitionAnimator
-import ChameleonFramework
-import ImagePicker
-import ImageIO
 
 let airBnbImageFooterHeight: CGFloat = 58
 let airBnbHeight: CGFloat = 218 + airBnbImageFooterHeight
@@ -19,9 +14,7 @@ let airBnbInset = UIEdgeInsetsMake(0, 24, 0, 24)
 let airbnbSpacing = 12
 
 
-final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, ASTableDelegate, ARNImageTransitionZoomable, ZoomCellDelegate, ImagePickerDelegate {
-    
-
+final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, ASTableDelegate {
     
     var sections : [Section] = [Section]()
     
@@ -32,25 +25,38 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
     // MARK: Firebase init
     var ref: FIRDatabaseReference!
     var refs: [FIRDatabaseReference] = [FIRDatabaseReference]()
-    var _storage = FIRStorage.storage()
-    var _storageRef: FIRStorageReference
     
     // ARNImageTransitionZoomable
     var _imageTransitionZoomable: ASNetworkImageNode?
     
+    var statusBarHidden = false {
+        didSet {
+            UIView.animate(withDuration: 0.5) { () -> Void in
+                self.setNeedsStatusBarAppearanceUpdate()
+            }
+        }
+    }
+    
+    let headerView = HeaderView(text: "Addo Elephant Park")
+    
     
     init() {
         // Create a root reference
-        self._storageRef = self._storage.reference()
         super.init(node: ASTableNode(style: UITableViewStyle.grouped))
         tableNode.view.asyncDataSource = self
         tableNode.view.asyncDelegate = self
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return self.statusBarHidden
+    }
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .none
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        showCamera()
         
         // removing text "back" from statusbar
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -61,51 +67,9 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
         self.tableNode.view.separatorColor = UIColor.clear
         
         // View
-        self.tableNode.view.contentInset = UIEdgeInsets(top: 25, left: 0, bottom: 0, right: 0)
-        
-
-        
-//        let searchController = UISearchController(searchResultsController: nil)
-//        searchController.searchResultsUpdater = self
-//        searchController.hidesNavigationBarDuringPresentation = false
-//        searchController.dimsBackgroundDuringPresentation = false
-//        searchController.definesPresentationContext = true
-//        searchController.searchBar.sizeToFit()
-//        self.tableNode.view.tableHeaderView = searchController.searchBar
-        
-        let wrapper = ASDisplayNode()
-        wrapper.frame = CGRect(x: 0, y: 0, width: 320, height: 300)
-        wrapper.backgroundColor = UIColor.white
-        wrapper.isAccessibilityElement = false
-        wrapper.accessibilityLabel = "wrapperNode"
-        wrapper.accessibilityIdentifier = "wrapperNode"
-        wrapper.isUserInteractionEnabled = true
-        
-        let buttonAddData = UIButton(frame: CGRect(x: 25, y: 0, width: 150, height: 50))
-        buttonAddData.setBackgroundColor(color: UIColor.flatBlue(), forState: .normal)
-        buttonAddData.setBackgroundColor(color: UIColor.flatBlueColorDark(), forState: .highlighted)
-        buttonAddData.setTitle("Add / Delete", for: .normal)
-        buttonAddData.addTarget(self, action: #selector(didTapAdd), for: .touchUpInside)
-        wrapper.view.addSubview(buttonAddData)
-        
-        let buttonClearCache = UIButton(frame: CGRect(x: self.tableNode.bounds.width - 25 - 150, y: 0, width: 150, height: 50))
-        buttonClearCache.setBackgroundColor(color: UIColor.flatRed(), forState: .normal)
-        buttonClearCache.setBackgroundColor(color: UIColor.flatRedColorDark(), forState: .highlighted)
-        buttonClearCache.setTitle("Clear Cache", for: .normal)
-        buttonClearCache.addTarget(self, action: #selector(didTapClearCache), for: .touchUpInside)
-        wrapper.view.addSubview(buttonClearCache)
-        
-        let buttonCamera = UIButton(frame: CGRect(x: 25, y: 75, width: 150, height: 50))
-        buttonCamera.setBackgroundColor(color: UIColor.flatLime(), forState: .normal)
-        buttonCamera.setBackgroundColor(color: UIColor.flatLimeColorDark(), forState: .highlighted)
-        buttonCamera.setTitle("Spot!", for: .normal)
-        buttonCamera.addTarget(self, action: #selector(buttonTouched(button:)), for: .touchUpInside)
-        wrapper.view.addSubview(buttonCamera)
-        
-        self.tableNode.view.tableFooterView = wrapper.view
-        self.tableNode.view.tableFooterView?.frame = CGRect(x: 0, y: 0, width: 250, height: 150)
-        
-        
+        self.tableNode.view.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        self.headerView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 144)
+        self.tableNode.view.tableHeaderView = self.headerView
         
         // MARK: Firebase
         ref = FIRDatabase.database().reference()
@@ -121,16 +85,22 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
         
     }
     
+    override func viewWillLayoutSubviews() {
+        // It’s safe to use the view controller’s views’ bound size since the logic is inside viewWillLayoutSubviews() instead of viewDidLoad().
+        // By this time in its lifecycle, the view controller’s view will already have its size set.
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
+        self.statusBarHidden = false
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("storyboards are incompatible with truth and beauty")
     }
     
-    override func viewWillLayoutSubviews() {
-    }
+   
     
     // MARK: ASTableView data source and delegate.
     
@@ -159,33 +129,49 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
     
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerNode = SectionHeaderNode(headerText: self.sections[section].name)
-        headerNode.frame = CGRect(x: 0, y: 0, width: self.tableNode.bounds.width, height: 46)
-        return headerNode.view
+        return createSectionHeaderView(text: self.sections[section].name)
         
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 46
+        return 74
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.frame = CGRect(x: 0, y: 0, width: self.tableNode.view.bounds.size.width, height: 46)
-        headerView.backgroundColor = UIColor.white
-        return headerView
-    }
-    
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 46
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func createSectionHeaderView(text: String) -> UIView {
+        let view = UIView(frame: CGRect.zero)
+        view.backgroundColor = UIColor.white
         
+        let title = UILabel()
+        title.attributedText = NSAttributedString(
+            string: text,
+            attributes: [
+                NSFontAttributeName: UIFont(name: "CircularStd-Book", size: 24)!,
+                NSForegroundColorAttributeName: UIColor(red:0.24, green:0.24, blue:0.24, alpha:1.00), // Baltic sea
+                NSBackgroundColorAttributeName: UIColor.clear,
+                NSKernAttributeName: 0.0,
+                ])
+        title.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(title)
+        
+        let constraintLeftTitle = NSLayoutConstraint(item: title, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 20)
+        let constraintCenterYTitle = NSLayoutConstraint(item: title, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0)
+        
+        view.addConstraint(constraintLeftTitle)
+        view.addConstraint(constraintCenterYTitle)
+        
+        return view
     }
+
     
-    // MARK: - CustomCellDelegate: Show detail
+}
+
+
+extension ViewController : ARNImageTransitionZoomable, ZoomCellDelegate {
+    
+    /*
+     * ZoomCellDelegate
+     */
     
     func selectedItem(_ item:SectionData, _ image:ASNetworkImageNode){
         self._imageTransitionZoomable = image
@@ -193,16 +179,18 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
         let controller = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
         controller._data = item
         controller._image = image.image
+        
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
-    // MARK: - ARNImageTransitionZoomable
+    /*
+     * ARNImageTransitionZoomable
+     */
     
     func createTransitionImageView() -> UIImageView {
-        let width = self._imageTransitionZoomable?.image!.accessibilityFrame.width
-        print("__ Image size: \(width)")
+        
+        // Create imageView on given image
         let imageView = UIImageView(image: self._imageTransitionZoomable?.image)
-//        imageView.contentMode = (self._imageTransitionZoomable?.contentMode)!
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = false
@@ -224,183 +212,4 @@ final class ViewController: ASViewController<ASDisplayNode>, ASTableDataSource, 
     func dismissalCompletionAction(_ completeTransition: Bool) {
         self._imageTransitionZoomable?.isHidden = false
     }
-    
-    
-    // MARK: Action Handling
-    
-    @objc fileprivate func didTapAdd() {
-        
-        let db = DatabaseModels()
-        
-        let alert = UIAlertController(title: "Firebase", message: "Add or delete items?", preferredStyle: UIAlertControllerStyle.alert)
-        
-        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.destructive, handler: { action in
-            db.deleteBatch()
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Add", style: UIAlertActionStyle.default, handler: { action in
-            db.insertBatch()
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Add 10", style: UIAlertActionStyle.default, handler: { action in
-            db.insertBatch(count: 10)
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Add 50", style: UIAlertActionStyle.default, handler: { action in
-            db.insertBatch(count: 50)
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Add Zebra", style: UIAlertActionStyle.default, handler: { action in
-            db.addAnimal(animal: "Zebra")
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Add Giraffe", style: UIAlertActionStyle.default, handler: { action in
-            db.addAnimal(animal: "Giraffe")
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Add Turtle", style: UIAlertActionStyle.default, handler: { action in
-            db.addAnimal(animal: "Turtle")
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Add Elephant", style: UIAlertActionStyle.default, handler: { action in
-            db.addAnimal(animal: "Elephant")
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Add Bison", style: UIAlertActionStyle.default, handler: { action in
-            db.addAnimal(animal: "Bison")
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
-        
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    @objc fileprivate func didTapClearCache() {
-        ImageCache.default.calculateDiskCacheSize { size in
-            let alert = UIAlertController(title: "Cache", message: "Used disk size: \(size / 1024 / 1024) MB", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Clear cache", style: UIAlertActionStyle.destructive, handler: { action in
-                // Clear memory cache right away.
-                ImageCache.default.clearMemoryCache()
-                
-                // Clear disk cache. This is an async operation.
-                ImageCache.default.clearDiskCache()
-            }))
-            
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
-            
-            self.present(alert, animated: true, completion: nil)
-            
-        }
-    }
-    
-    func buttonTouched(button: UIButton) {
-        showCamera()
-    }
-    
-    // MARK: - ImagePickerDelegate
-    
-    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
-//        imagePicker.dismiss(animated: true, completion: nil)
-        self.tabBarController?.dismiss(animated: false, completion: nil)
-    }
-    
-    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-        print(":: ImagePicker - wrapperDidPress")
-    }
-    
-    
-    // ImagePicker done
-    public func doneButtonDidPress(_ imagePicker: ImagePickerController, original: [UIImage], images: [UIImage]) {
-        guard images.count > 0 else { return }
-        
-        var imageAssets: [UIImage] {
-            return AssetManager.resolveAssets(imagePicker.stack.assets)
-        }
-        
-        let imageNode = ASImageNode()
-        
-        imageNode.image = images[0].resizedImageWithinRect(rectSize: CGSize(width: 375, height: 300))
-        imageNode.frame = CGRect(x: 0, y: 0, width: 375, height: 300)
-        
-        self.tableNode.addSubnode(imageNode)
-        
-        self.tabBarController?.dismiss(animated: false, completion: nil)
-        //        processImages(imagePicker: imagePicker, images: images)
-
-    }
-    
-    func processImages(imagePicker: ImagePickerController, images: [UIImage]){
-        // Add progress bar
-        let progressView = UIProgressView(frame: CGRect(x: 0, y: 0, width: self.tableNode.frame.width, height: 1))
-        progressView.progressViewStyle = .default
-        progressView.progressTintColor = UIColor.flatRed()
-        progressView.trackTintColor = UIColor.flatWhite()
-        progressView.progress = 0.25
-        self.tabBarController?.tabBar.addSubview(progressView)
-        
-        // Dismiss ImagePicker
-        imagePicker.dismiss(animated: true, completion: nil)
-        
-        // Upload image
-        let imageData = UIImageJPEGRepresentation(images[0], 1.0)                                                               // Get data
-        let imageResizedData = UIImageJPEGRepresentation(images[0].resizedImageWithinRect(rectSize: CGSize(width: 375, height: 300)), 0.6) // Get data from resized image
-        let timestamp = String(Int64(NSDate().timeIntervalSince1970 * 1000))                                                    // Get image name
-        let imageRef = self._storageRef.child("animals/\(timestamp).jpg")                                                       // Get storage reference for new uploaded image with given imagename
-        let imageResizedRef = self._storageRef.child("animals/\(timestamp)_375x300.jpg")                                        // Get storage reference for new uploaded image with given imagename
-        
-        var imageURL: String = String()
-        let metadataForImages = FIRStorageMetadata()
-        metadataForImages.contentType = "image/jpeg"
-        
-        let imageUploadTask = imageRef.put(imageData!, metadata: metadataForImages)
-        
-        imageUploadTask.observe(.progress) { snapshot in
-            // Upload reported progress
-            if let progress = snapshot.progress {
-                let percentComplete: Float = 60 * Float(progress.completedUnitCount) / Float(progress.totalUnitCount)
-                print(":: Upload image 1 - \(percentComplete)")
-                progressView.setProgress(percentComplete / 100, animated: true);
-                
-            }
-        }
-        imageUploadTask.observe(.success) { snapshot in
-            imageURL = (snapshot.metadata?.downloadURL()!.absoluteString)!
-            
-            let imageResizedUploadTask = imageResizedRef.put(imageResizedData!, metadata: metadataForImages)
-            imageResizedUploadTask.observe(.progress) { snapshot in
-                // Upload reported progress
-                if let progress = snapshot.progress {
-                    let percentComplete: Float = 30 * Float(progress.completedUnitCount) / Float(progress.totalUnitCount)
-                    print(":: Upload image  2 - \(percentComplete)")
-                    progressView.setProgress(0.6 + percentComplete / 100, animated: true);
-                    
-                }
-            }
-            imageResizedUploadTask.observe(.success) { snapshot in
-                // Upload completed successfully
-                DatabaseModels().addAnimal(name: timestamp, url: imageURL, resizedURL: (snapshot.metadata?.downloadURL()?.absoluteString)!)
-                progressView.setProgress(1, animated: true)
-                Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (timer) in
-                    progressView.removeFromSuperview()
-                })
-            }
-        }
-    }
-    
-    
-    
-    func showCamera(){
-        let imagePicker = ImagePickerController()
-        imagePicker.delegate = self
-        Configuration.recordLocation = true
-        Configuration.imageLimit = 1
-        imagePicker.imageLimit = 1
-        
-        let imageNavcontroller = UINavigationController(rootViewController: imagePicker)
-        self.tabBarController?.show(imageNavcontroller, sender: nil)
-        
-//        present(imagePicker, animated: true, completion: nil)
-    }
-    
-    
 }

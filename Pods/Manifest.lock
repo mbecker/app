@@ -55,6 +55,7 @@ PODS:
     - PINCache (>= 3.0.0-beta)
   - PINRemoteImage/iOS (3.0.0-beta.3):
     - PINRemoteImage/Core
+  - PMAlertController (2.0.1)
 
 DEPENDENCIES:
   - ARNTransitionAnimator
@@ -66,6 +67,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - Kingfisher (~> 3.0)
   - Mapbox-iOS-SDK (~> 3.3.4)
+  - PMAlertController
 
 EXTERNAL SOURCES:
   AsyncDisplayKit:
@@ -97,7 +99,8 @@ SPEC CHECKSUMS:
   Mapbox-iOS-SDK: b22da0d9703fcfb0a8b592b6a7f6a21264fe44b0
   PINCache: 6911fe422a633e18b3d3ddf2bd4f0e55e36e2892
   PINRemoteImage: 308731aa6534500e58fc211b9cc2bb7252df25ba
+  PMAlertController: 8f809a67e740bd6ce1bb7d6017c12c94e997f64b
 
-PODFILE CHECKSUM: 14139941943d61e7d172ed2b0fac3df4d1f348d1
+PODFILE CHECKSUM: 42531e3869df1ccc608ec38fb8090f93fc967875
 
 COCOAPODS: 1.1.0.rc.3

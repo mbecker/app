@@ -47,7 +47,6 @@
 		D151CE431DC7D95000512942 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D151CE401DC7D95000512942 /* HeaderView.swift */; };
 		D171AA2A1DA56AE80074BB28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D171AA291DA56AE80074BB28 /* AppDelegate.swift */; };
 		D171AA321DA56AE90074BB28 /* app.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D171AA301DA56AE80074BB28 /* app.xcdatamodeld */; };
-		D171AA341DA56AE90074BB28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D171AA331DA56AE90074BB28 /* Assets.xcassets */; };
 		D171AA371DA56AE90074BB28 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D171AA351DA56AE90074BB28 /* LaunchScreen.storyboard */; };
 		D171AA421DA56AE90074BB28 /* appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D171AA411DA56AE90074BB28 /* appTests.swift */; };
 		D171AA4D1DA56AE90074BB28 /* appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D171AA4C1DA56AE90074BB28 /* appUITests.swift */; };
@@ -164,6 +163,7 @@
 		D1B8F7B31DB7ACB800E32808 /* DatabaseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B8F7B21DB7ACB800E32808 /* DatabaseModels.swift */; };
 		D1B8F7B51DB7ACC200E32808 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D1B8F7B41DB7ACC200E32808 /* README.md */; };
 		D1B9392E1DBE2FFA000AFB8A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B9392D1DBE2FFA000AFB8A /* TabBarController.swift */; };
+		D1D6FEA61DC7E47A00A8D8DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1D6FEA51DC7E47A00A8D8DE /* Assets.xcassets */; };
 		F1D66AD9EC29977070824FEA /* Pods_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708292EF6BC3E087DADC69B5 /* Pods_app.framework */; };
 /* End PBXBuildFile section */
 
@@ -239,7 +239,6 @@
 		D171AA261DA56AE80074BB28 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D171AA291DA56AE80074BB28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D171AA311DA56AE80074BB28 /* app.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = app.xcdatamodel; sourceTree = "<group>"; };
-		D171AA331DA56AE90074BB28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D171AA361DA56AE90074BB28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D171AA381DA56AE90074BB28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D171AA3D1DA56AE90074BB28 /* appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = appTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -361,6 +360,7 @@
 		D1B8F7B41DB7ACC200E32808 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = app/README.md; sourceTree = "<group>"; };
 		D1B8F7B81DB7AE4200E32808 /* ImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ImagePicker.xcodeproj; path = ImagePicker/ImagePicker.xcodeproj; sourceTree = "<group>"; };
 		D1B9392D1DBE2FFA000AFB8A /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		D1D6FEA51DC7E47A00A8D8DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E140BDFF9D30821D12FB94EA /* Pods-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app.release.xcconfig"; path = "Pods/Target Support Files/Pods-app/Pods-app.release.xcconfig"; sourceTree = "<group>"; };
 		E34F458A3899A7A598E72295 /* Pods-appUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-appUITests/Pods-appUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -476,7 +476,7 @@
 				D171AA291DA56AE80074BB28 /* AppDelegate.swift */,
 				D171AA7A1DA574D20074BB28 /* Helpers.swift */,
 				D171AA351DA56AE90074BB28 /* LaunchScreen.storyboard */,
-				D171AA331DA56AE90074BB28 /* Assets.xcassets */,
+				D1D6FEA51DC7E47A00A8D8DE /* Assets.xcassets */,
 				D171AA301DA56AE80074BB28 /* app.xcdatamodeld */,
 			);
 			path = app;
@@ -905,6 +905,7 @@
 				D151CE381DC7C02E00512942 /* CircularStd-MediumItalic.otf in Resources */,
 				D195396C1DC4AF2C00679247 /* Pelican-66.png in Resources */,
 				D195397E1DC4AF2C00679247 /* AUTO@3x.png in Resources */,
+				D1D6FEA61DC7E47A00A8D8DE /* Assets.xcassets in Resources */,
 				D151CE2C1DC7C02E00512942 /* CircularStd-BoldItalic.otf in Resources */,
 				D171AA951DA575070074BB28 /* Calibre-SemiboldItalic.otf in Resources */,
 				D195395C1DC4AF2C00679247 /* Deer-66.png in Resources */,
@@ -912,7 +913,6 @@
 				D19539751DC4AF2C00679247 /* Twitter-66.png in Resources */,
 				D171AA971DA575070074BB28 /* Calibre-ThinItalic.otf in Resources */,
 				D195394F1DC4AF2C00679247 /* Fountain-66.png in Resources */,
-				D171AA341DA56AE90074BB28 /* Assets.xcassets in Resources */,
 				D195394D1DC4AF2C00679247 /* cutlery.png in Resources */,
 				D151CE2F1DC7C02E00512942 /* CircularStd-Book.otf in Resources */,
 				D171AA901DA575070074BB28 /* Calibre-Medium.otf in Resources */,

@@ -5,9 +5,6 @@
       location = "group:TOCropViewController/TOCropViewControllerExample.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:ImagePicker/ImagePicker.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:app.xcodeproj">
    </FileRef>
    <FileRef
